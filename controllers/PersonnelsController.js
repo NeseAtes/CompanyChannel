@@ -23,7 +23,8 @@ var login=function(req,res,next){
                     var token=tokenCtrl.token(personnelid);
                     res.cookie('auth',token);
                     res.locals.data={
-                        data:token
+                        data:token,
+                        is_user:true
                     };
                     next();
                 }
