@@ -6,6 +6,7 @@
     "start": "node app"
   },
   "dependencies": {
+    "bcrypt": "^3.0.5",
     "cookie-parser": "^1.4.4",
     "elasticsearch": "^15.4.1",
     "express": "^4.16.4",
