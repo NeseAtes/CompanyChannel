@@ -14,3 +14,6 @@ var getAll=function(tablename,conditions,req,res,next){
         next();
     });
 }
+
+module.exports.addData=addData;
+module.exports.getAll=getAll;
