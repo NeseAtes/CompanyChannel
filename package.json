@@ -1,0 +1,17 @@
+{
+  "name": "mychannel",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "elasticsearch": "^15.4.1",
+    "express": "^4.16.4",
+    "express-session": "^1.16.0",
+    "moment": "^2.24.0",
+    "mongodb": "^3.2.3",
+    "morgan": "^1.9.1"
+  }
+}
