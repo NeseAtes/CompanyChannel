@@ -11,17 +11,17 @@ module.exports = function(app) {
 
 	app.post('/login',BaseController.InitSession,PersonnelsCtrl.login,BaseController.EndSession);
 
-	app.post('/api/subject',BaseController.InitSession,SubjectController.addSubject,BaseController.EndSession);
-	app.get('/api/subject',BaseController.InitSession,SubjectController.getSubject,BaseController.EndSession);
+	app.post('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.addSubject,BaseController.EndSession);
+	app.get('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubject,BaseController.EndSession);
 
-	app.post('/api/comment',BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
-	app.get('/api/comment',BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
+	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
+	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
 	
-	app.get('/api/companies',BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
-	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
+	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
+	app.post('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
 
-	app.get('/api/personnels',BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
-	app.post('/api/personnels',BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
+	app.get('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
+	app.post('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
 
-	app.get('/logout',BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
+	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };
