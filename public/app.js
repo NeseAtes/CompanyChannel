@@ -5,7 +5,10 @@ angular.forEach(config,function(key,value) {
 });
 app.config(function($routeProvider,$locationProvider){
   $locationProvider.hashPrefix('');
-  $routeProvider.when('/login', {
+  $routeProvider.when('/', {
+    templateUrl: './pages/subjectListComponent/subject_list.html',
+    controller: 'subject_listController'
+  }).when('/login', {
     templateUrl: './pages/loginComponent/login.html',
     controller: 'loginController'
   });
