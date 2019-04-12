@@ -5,11 +5,12 @@ var SubjectController = require("../controllers/SubjectController");
 var CompaniesCtrl= require("../controllers/CompaniesController");
 var PersonnelsCtrl= require("../controllers/PersonnelsController");
 var ElasticSearchCtrl =require("../controllers/ElasticSearchController");
+var HomeCtrl= require("../controllers/HomeController");
 var TokenCtrl=require("../controllers/TokenController");
 
 module.exports = function(app) {
 	app.use(cookieParser())
-
+	app.get('/',HomeCtrl.IndexAction);
 	app.post('/login',BaseController.InitSession,PersonnelsCtrl.login,BaseController.EndSession);
 
 	app.post('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.addSubject,BaseController.EndSession);
