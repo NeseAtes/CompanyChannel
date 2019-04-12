@@ -1,9 +1,9 @@
-<link rel="stylesheet" type="text/css" href="subject_list.css">
+<!--link rel="stylesheet" type="text/css" href="subject_list.css">-->
 <div class="row post-content">
     <div class="content-container clearfix">
       <div class="col-md-6">          
         <ul ng-repeat="sub in subjects" class="mail-list">
-            <span ng-click="getComments(sub._id)" class="sub-heading">{{sub.subject}}</span>
+            <a style="color:black;"href="#/subject/5cb0353d28aada1eb87dba60"><span class="sub-heading">{{sub.subject}}</span></a>
             <span style="font-size:x-small;">{{sub.personnel_ID}}</span>
         </ul>
       </div>
