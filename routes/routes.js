@@ -4,6 +4,7 @@ var CommentController = require("../controllers/CommentController");
 var SubjectController = require("../controllers/SubjectController");
 var CompaniesCtrl= require("../controllers/CompaniesController");
 var PersonnelsCtrl= require("../controllers/PersonnelsController");
+var ElasticSearchCtrl =require("../controllers/ElasticSearchController");
 var TokenCtrl=require("../controllers/TokenController");
 
 module.exports = function(app) {
@@ -22,6 +23,10 @@ module.exports = function(app) {
 
 	app.get('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
 	app.post('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
+
+	app.post('/api/createIndex',BaseController.InitSession,ElasticSearchCtrl.createIndex,BaseController.EndSession);
+
+	app.post('/api/elastic',TokenCtrl.tokenControl,BaseController.InitSession,ElasticSearchCtrl.search,BaseController.EndSession);
 
 	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };
