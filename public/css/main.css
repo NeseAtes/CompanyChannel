@@ -32,14 +32,14 @@
 /*[ RESTYLE TAG ]*/
 
 a{
-    color: grey;
-    size: 90px;
-    text-align: right;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
     padding: 12px 28px;
   }
   a:hover {
   text-decoration: none;
-    color: #fff;
+    color: #d0d6e2;
   }
 /** {
 	margin: 0px; 
