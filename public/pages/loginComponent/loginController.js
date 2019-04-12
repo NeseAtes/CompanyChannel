@@ -1,22 +1,13 @@
-app.controller('loginController', function($scope, $http, $window, SERVICE_URL) {
-	console.log("giriyor");
-	$scope.showBtn=function(){
-		console.log("cookie:" , $cookies.get('auth')); 
-		if(typeof($cookies.get('auth'))=='string'){
-			$scope.show= true;
-		}
-		else{
-			$scope.show= false;
-		}
-		console.log($scope.show)
-	}
-
-    $scope.login=function (email,password) {
+app.controller('loginController', function($scope, $http,$location, $window, SERVICE_URL) {
+    $scope.login=function () {
+        var email=$scope.email;
+        var password=$scope.password;
         $http.post("http://localhost:3000/login",{email:email,password:password})
         .then(function(response){
+            console.log(response)
             $window.location.reload();
 
-			if(resp.data.is_user){
+			if(response.data.is_user){
 				$location.path("/");
 			}
         });
