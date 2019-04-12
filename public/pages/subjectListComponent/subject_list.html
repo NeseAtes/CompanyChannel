@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="subject_list.css">
+
+<div class="row post-content">
+    <div class="content-container clearfix">
+      <div class="col-md-12">
+          
+        <ul ng-repeat="sub in subjects" class="mail-list">
+          <li>
+            <a href="">
+              <span class="sub-heading">{{sub.subject}}</span>
+              <span class="subtopic_description">{{sub.description}}</span>
+              <span style="font-size: x-small"class="sub-heading">{{sub.personnel_name}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+ </div>
