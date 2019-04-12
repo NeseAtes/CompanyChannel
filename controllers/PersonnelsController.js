@@ -8,7 +8,8 @@ var addPersonnel=function(req,res,next) {
     });
 }
 var getPersonnels=function(req,res,next){
-    mainCtrl.getAll("personnels",{},req,res,next);
+    var company_id=res.locals.data.data.company_id;
+    mainCtrl.getAll("personnels",{company_ID:company_id},req,res,next);
 }
 var login=function(req,res,next){
     var connection=res.locals.database;
@@ -17,10 +18,11 @@ var login=function(req,res,next){
         else if(result!=null){
             bcrypt.compare(req.body.password, result.password, function(err, reslt) {
                 if(reslt){
-                    var personnelid={
-                        personnel_id:result._id
+                    var personnel={
+                        personnel_id:result._id,
+                        company_id:result.company_ID
                     };
-                    var token=tokenCtrl.token(personnelid);
+                    var token=tokenCtrl.token(personnel);
                     res.cookie('auth',token);
                     res.locals.data={
                         data:token,
