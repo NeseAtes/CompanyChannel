@@ -5,8 +5,9 @@ app.controller('loginController', function($scope, $http,$location, $window, SER
         $http.post("http://localhost:3000/login",{email:email,password:password})
         .then(function(response){
             console.log(response)
-            $window.location.reload();
-
+            setTimeout(function(){
+                $window.location.reload();
+            });
 			if(response.data.is_user){
 				$location.path("/");
 			}
