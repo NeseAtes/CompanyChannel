@@ -3,10 +3,10 @@
 	<!-- Contenedor Principal -->
     <div class="comments-container">
 			<a ng-repeat="sub in subject">
-					<span class="sub-heading">{{sub.subject}}</span>
-					<span class="subtopic_description">{{sub.description}}</span>
-					<span style="font-size: x-small"class="sub-heading">{{sub.personnel_ID}}</span>
-				</a>
+				<span class="sub-heading">{{sub.subject}}</span>
+				<span class="subtopic_description">{{sub.description}}</span>
+				<span style="font-size: x-small"class="sub-heading">{{sub.personnel_ID}}</span>
+			</a>
 		<ul id="comments-list" class="comments-list">
 			<li>
 				<div ng-repeat="comment in comments" class="comment-main-level">

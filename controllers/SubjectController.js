@@ -1,4 +1,5 @@
 var mainCtrl = require('./MainController');
+var mongodb = require('mongodb');
 
 var addSubject = function(req,res,next){
 	req.body["company_ID"]=res.locals.data.data.company_id;
@@ -16,6 +17,16 @@ var getSubject = function(req,res,next){
 	}
 	mainCtrl.getAll("subjects",condition,req,res,next);
 };
+var getOneSubject=function(req,res,next) {
+	var company_id=res.locals.data.data.company_id;
+	var condition={
+		company_ID:company_id,
+		_id:new mongodb.ObjectId(req.query.subject_ID)
+	}
+	console.log("condition",condition)
+	mainCtrl.getAll("subjects",condition,req,res,next);
+}
 
 module.exports.addSubject=addSubject;
 module.exports.getSubject=getSubject;
+module.exports.getOneSubject=getOneSubject;

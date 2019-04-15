@@ -1,6 +1,6 @@
 app.controller('subjectController', function($scope, $http,$routeParams) {
     $scope.sub_id=$routeParams.subjectid;
-    $http.get("http://localhost:3000/api/subject?subject_ID="+$scope.sub_id).then(function(response) {
+    $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
         console.log(response)
         $scope.subject=response.data.data;
     });
