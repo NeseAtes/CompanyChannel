@@ -12,7 +12,6 @@ var getComment = function(req,res,next){
 	var condition={
 		subject_ID:req.query.subject_ID
 	}
-	console.log(condition)
 	mainCtrl.getAll("comments",condition,req,res,next);
 };
 

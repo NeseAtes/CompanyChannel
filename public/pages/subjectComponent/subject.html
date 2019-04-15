@@ -5,7 +5,7 @@
 			<a ng-repeat="sub in subject">
 				<span class="sub-heading">{{sub.subject}}</span>
 				<span class="subtopic_description">{{sub.description}}</span>
-				<span style="font-size: x-small"class="sub-heading">{{sub.personnel_ID}}</span>
+				<span style="font-size: x-small"class="sub-heading">{{sub.personnel_name}}</span>
 			</a>
 		<ul id="comments-list" class="comments-list">
 			<li>
@@ -13,7 +13,7 @@
 					<!-- Contenedor del Comentario -->
 					<div class="comment-box">
 						<div class="comment-head">
-							<h6 style="color: black"class="comment-name">{{comment.personnel_id}}</h6>
+							<h6 style="color: black"class="comment-name">{{comment.personnel_name}}</h6>
 							<span>{{comment.date}}</span>
 						</div>
 						<div class="comment-content">

@@ -23,7 +23,6 @@ var getOneSubject=function(req,res,next) {
 		company_ID:company_id,
 		_id:new mongodb.ObjectId(req.query.subject_ID)
 	}
-	console.log("condition",condition)
 	mainCtrl.getAll("subjects",condition,req,res,next);
 }
 

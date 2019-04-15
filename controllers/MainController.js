@@ -1,4 +1,5 @@
 var esController = require("./ElasticSearchController");
+var mongodb = require('mongodb');
 
 var addData=function(tablename,req,res,next){
   var connection=res.locals.database;
@@ -38,10 +39,26 @@ var addData=function(tablename,req,res,next){
 }
 var getAll=function(tablename,conditions,req,res,next){
     var connection=res.locals.database;
+    var myresult=[];
+    var count=0;
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
         if(err) throw err;
-        res.locals.data={data:result};
-        next();
+        myresult=result;
+        
+    if(tablename=="comments"||tablename=="subjects"){
+      myresult.forEach(element => {
+        connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
+        .toArray(function(err,rslt){
+          if(err) throw err;
+          element["personnel_name"]=rslt[0].personnel_name;
+          count++;
+          if(count==myresult.length){
+            res.locals.data={data:myresult};
+            next();
+          }
+        });
+      });
+    }
     });
 }
 
