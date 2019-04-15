@@ -61,6 +61,16 @@ var getAll=function(tablename,conditions,req,res,next){
     }
     });
 }
+var updateData=function(tablename,query,newVal,res,next){
+  var connection=res.locals.database;
+  connection.collection(tablename).update(query,newVal,function(err,result){
+    if(err) throw err;
+    else{
+        next();
+    }
+  });
+}
 
 module.exports.addData=addData;
 module.exports.getAll=getAll;
+module.exports.updateData=updateData;
