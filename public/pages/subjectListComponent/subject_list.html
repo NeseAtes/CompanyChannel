@@ -3,8 +3,10 @@
     <div class="content-container clearfix">
       <div class="col-md-6">          
         <ul ng-repeat="sub in subjects" class="mail-list">
-            <a style="color:black;"href="#/subject/5cb42845e1f93c6d68990307"><span class="sub-heading">{{sub.subject}}</span></a>
-            <span style="font-size:x-small;">{{sub.personnel_ID}}</span>
+
+            <a style="color:black;"href="#/subject/{{sub._id}}"><span class="sub-heading">{{sub.subject}}</span></a>
+            <span style="font-size:x-small;">{{sub.personnel_name}}</span>
+            <span>{{sub.count}}</span>
         </ul>
       </div>
     </div>

@@ -1,4 +1,15 @@
-app.controller('loginController', function($scope, $http,$location, $window, SERVICE_URL) {
+app.controller('loginController', function($scope, $http, $cookies,$location, $window, SERVICE_URL,$localStorage) {
+    $scope.showBtn=function(){
+        console.log("cookie:" , $cookies.get('auth')); 
+        if(typeof($cookies.get('auth'))=='string'){
+            $scope.show= true;
+        }
+        else{
+            $scope.show= false;
+        }
+        console.log($scope.show)
+    }
+
     $scope.login=function () {
         var email=$scope.email;
         var password=$scope.password;
@@ -8,9 +19,25 @@ app.controller('loginController', function($scope, $http,$location, $window, SER
             setTimeout(function(){
                 $window.location.reload();
             });
-			if(response.data.is_user){
-				$location.path("/");
-			}
+            if(response.data.is_user==true){
+                $location.path("/");
+            }
         });
     }
+
+    $scope.signout=function(){
+        $http.get("http://localhost:3000/logout")
+        .then(function(resp){
+            console.log("çıkıtı")
+            if(resp.data.message=='session closed'){
+                setTimeout(function(){
+                    $window.location.reload();
+                });
+                $localStorage.$reset();
+                $location.path("/");
+            }
+        });
+    }
+    $scope.showBtn();
+
 });

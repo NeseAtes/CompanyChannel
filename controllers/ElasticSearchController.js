@@ -56,6 +56,7 @@ var addDocumentInner = function(subObject,cb){
 		type: 'subjects',
 		id:subObject.insertId,
 		body:{
+			id: subObject._id,
 			subject: subObject.subject,
 			description: subObject.description,
 			personnel_ID: subObject.personnel_ID,
@@ -75,7 +76,7 @@ var addDocumentInner = function(subObject,cb){
 var search = function(req,res,next){
 	var value = req.query.value || req.body.value ||'';
 	var companyid = res.locals.data.data.company_id;
-	console.log("personnel_id", companyid);
+	console.log("companyid", companyid);
 	console.log("value",value);
 	client.search({
 		index: 'company',

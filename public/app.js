@@ -1,4 +1,4 @@
-var app = angular.module('myApp',['ngRoute']);
+var app = angular.module('myApp',['ngRoute', 'ngCookies', 'ngStorage']);
 
 angular.forEach(config,function(key,value) {
   app.constant(value,key);
@@ -11,35 +11,18 @@ app.config(function($routeProvider,$locationProvider){
   }).when('/login', {
     templateUrl: './pages/loginComponent/login.html',
     controller: 'loginController'
+  }).when('/elastic/:searchid',{
+  	templateUrl: './pages/elasticComponent/elastic.html',
+  	controller: 'elasticController'
   });
 });
 
-app.controller('appController',function($scope, $http, SERVICE_URL){
+app.controller('appController',function($scope, $http, SERVICE_URL,$window,$location){
 	$scope.elasticsearch =function(){
-		var data = {
-            value : $scope.search
-        };
-        //console.log($scope.search);
-        $http.post("http://localhost:3000/api/elastic", JSON.stringify(data))
-        .then(function(resp){
-            console.log("ES sonuc: ", resp.data.hits);
-        //$scope.logs=[];
-        $scope.users=[];
-            if ($scope.search == undefined) {
-                console.log("yazmadın??????????????????");
-            }
-            else{
-            //$scope.logs=[];
-            $scope.users=[];
-                for (var i = 0; i < resp.data.hits.length; i++) {
-               var a = resp.data.hits[i]._source;
-               console.log(resp.data.hits[i]._source);
-               //$scope.logs.push(a);
-               $scope.users.push(a);
-            }
-            } 
-        },function(err){
-            console.log("ES err: ", err);
-        });
-	}
-})
+	    setTimeout(function(){
+			$window.location.reload();
+		});
+		//$localStorage.$reset();
+		$location.path("/elastic/"+$scope.search);
+    }
+});
