@@ -17,38 +17,49 @@
 		color: white;
 		font-weight: bold;
 		font-size: 15px;
-		padding: 12px 28px;
+
 	}
 	a:hover {
 	text-decoration: none;
   	color: #d0d6e2;
   }
   #sag{
-    transform: translateX(+300%);
+    transform: translateX(+500%);
   }
 </style>
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #1c2a48;">
+    <nav ng-controller="appController" class="navbar navbar-expand-lg" style="background-color: #1c2a48;">
         <a href="#/">Logo</a>
         <form class="form-inline">
-            <input style="width: 800px" type="text" class="form-control" ng-model="search" placeholder="search">
+            <input style="width: 800px; margin-left: 20px" type="text" class="form-control" ng-model="search" placeholder="search">
+            <button ng-click="elasticsearch()">Search</button>
         </form>
-		<br>
-	    <a href="#/login">Sign in</a>
+
+        <ul  ng-controller="loginController">
+          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px" ng-if="!show" href="#/login" class="btn btn-md">Log in</a>
+          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px; color: #d0d6e2; font-size: 15px;" ng-if="show" ng-click="signout()" class="btn btn-md">Log out</a>
+        </ul>
+	    
     </nav>
     <div class="row" ng-view>
     </div>
+
 
 <script type="text/javascript" src="node_modules/angular/angular.js"></script>
 <script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
 <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
 <script type="text/javascript" src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+<script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+<script type="text/javascript" src="node_modules/ngstorage/ngStorage.min.js"></script>
 
 <script type="text/javascript" src="config/index.js"></script>
 <script type="text/javascript" src="app.js"></script>
 <script type="text/javascript" src="pages/loginComponent/loginController.js"></script>
 <script type="text/javascript" src="pages/subjectListComponent/subject_listController.js"></script>
 <script type="text/javascript" src="pages/subjectComponent/subjectController.js"></script>
+<script type="text/javascript" src="pages/elasticComponent/elasticController.js"></script>
+
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-var app = angular.module('myApp',['ngRoute']);
+var app = angular.module('myApp',['ngRoute', 'ngCookies', 'ngStorage']);
 
 angular.forEach(config,function(key,value) {
   app.constant(value,key);
@@ -11,5 +11,18 @@ app.config(function($routeProvider,$locationProvider){
   }).when('/login', {
     templateUrl: './pages/loginComponent/login.html',
     controller: 'loginController'
+  }).when('/elastic/:searchid',{
+  	templateUrl: './pages/elasticComponent/elastic.html',
+  	controller: 'elasticController'
   });
+});
+
+app.controller('appController',function($scope, $http, SERVICE_URL,$window,$location){
+	$scope.elasticsearch =function(){
+	    setTimeout(function(){
+			$window.location.reload();
+		});
+		//$localStorage.$reset();
+		$location.path("/elastic/"+$scope.search);
+    }
 });
