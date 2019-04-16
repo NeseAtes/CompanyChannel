@@ -1,4 +1,4 @@
-app.controller('subjectController', function($scope, $http,$routeParams) {
+app.controller('subjectController', function($scope,$window, $http,$routeParams) {
     $scope.sub_id=$routeParams.subjectid;
     console.log("subjectid",$routeParams.subjectid);
     $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
@@ -10,12 +10,16 @@ app.controller('subjectController', function($scope, $http,$routeParams) {
         $scope.comments=response.data.data;
     });
 
-    $scope.addComment=function() {
+    $scope.addComment=function(subid) {
         var data={
-            comment:$scope.comment
+            comment:$scope.comment,
+            subject_ID:subid
         }
+        console.log("data",data)
         $http.post("http://localhost:3000/api/comment",data).then(function(response) {
-            console.log(response)//TODO devam et
+            console.log(response.data.data)
+            if(response.data.data)
+                $window.alert("OK")
         });
     }
 });

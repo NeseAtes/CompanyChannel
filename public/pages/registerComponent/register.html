@@ -1,8 +1,7 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
+<style>
+	.container{position: absolute;
+    left: 25%;}
+</style>
 <div class="container">
 	<div class="row">
     <div class="col col-md-5">
@@ -22,14 +21,14 @@
                             <label class="control-label">Name</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input ng-model="name"class="form-control" placeholder="name" type="text">
+                                <input ng-model="name"class="form-control" autocomplete="off"placeholder="name" type="text">
                             </div>
                         </div>
 						<div class="form-group">
 							<label class="control-label">Email</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-								<input ng-model="email"class="form-control" placeholder="email@example.com" name="emailSignUp" type="email">
+								<input ng-model="email"class="form-control" autocomplete="off" placeholder="email@example.com" name="emailSignUp" type="email">
 							</div>
 						</div>
 							
@@ -37,7 +36,7 @@
 							<label class="control-label">Password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-								<input ng-model="password"class="form-control" placeholder="password" name="passwordSignUp" type="password">
+								<input ng-model="password"class="form-control" autocomplete="off" placeholder="password" name="passwordSignUp" type="password">
 							</div>
 						</div>
 						
@@ -45,14 +44,14 @@
 							<label class="control-label">Confirm password</label>
 							<div class="input-group">
 								<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-								<input ng-model="confirm_password"class="form-control" placeholder="confirm password" name="passwordConfirmSignUp" type="password">
+								<input ng-model="confirm_password" autocomplete="off"class="form-control" placeholder="confirm password" name="passwordConfirmSignUp" type="password">
 							</div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Role</label>
                             <div class="input-group">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                                <input ng-model="role"class="form-control" placeholder="role" name="passwordConfirmSignUp" id="passwordConfirmSignUp" type="password">
+                                <input ng-model="role"class="form-control" autocomplete="off" placeholder="role" name="passwordConfirmSignUp" id="passwordConfirmSignUp" type="password">
                             </div>
                         </div>
 												

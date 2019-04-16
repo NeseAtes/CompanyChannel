@@ -14,15 +14,22 @@ app.config(function($routeProvider,$locationProvider){
   }).when('/elastic/:searchid',{
   	templateUrl: './pages/elasticComponent/elastic.html',
   	controller: 'elasticController'
+  }).when('/register',{
+    templateUrl: './pages/registerComponent/register.html',
+    controller: 'registerController'
   });
 });
 
-app.controller('appController',function($scope, $http, SERVICE_URL,$window,$location){
+app.controller('appController',function($scope,$localStorage,$window,$location){
 	$scope.elasticsearch =function(){
 	    setTimeout(function(){
 			$window.location.reload();
 		});
 		//$localStorage.$reset();
 		$location.path("/elastic/"+$scope.search);
+    }
+    $scope.isAdmin=function(){
+      $scope.is_admin=$localStorage.is_admin;
+      return $scope.is_admin;
     }
 });
