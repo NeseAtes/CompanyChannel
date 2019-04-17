@@ -32,7 +32,7 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form name="loginform"class="login100-form validate-form" novalidate>
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
@@ -42,17 +42,17 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter email">
-						<input class="input100" type="email" ng-model="email" placeholder="Email">
+						<input class="input100" type="email" ng-model="email"autocomplete="off" placeholder="Email" required>
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" ng-model="password" placeholder="Password">
+						<input class="input100" type="password" ng-model="password"autocomplete="off" placeholder="Password" required>
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button ng-click="login()"class="login100-form-btn">Log in</button>
+						<button ng-click="login(loginform.$valid)"class="login100-form-btn">Log in</button>
 					</div>
 
 					<!--div class="text-center p-t-90">
