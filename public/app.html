@@ -50,9 +50,9 @@
 
   </nav>
 
-  <div class="col">
-      <div class="row">
-          <div ng-controller="appController" ng-show="isAdmin()" style="background-color: #ffffff;border-right: 5px solid; width:15%; height: 100%;"
+  <div ng-controller="appController" class="col">
+      <div ng-show="isAdmin()" class="row">
+          <div style="background-color: #ffffff;border-right: 5px solid; width:15%; height: 100%;"
           class="wrapper">
       
           <!-- Sidebar -->
@@ -71,9 +71,10 @@
             </ul>
           </div>
         </div>
-        
+        <div class="row" ng-view>
+        </div>
       </div>
-      <div class="row" ng-view>
+      <div ng-show="!isAdmin()"class="row" ng-view>
       </div>
   </div>
 
