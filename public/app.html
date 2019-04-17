@@ -32,8 +32,8 @@
 <body>
   
   <nav ng-controller="appController" class="navbar navbar-expand-lg" style="background-color: #1c2a48;">
-    <a href="#/">Logo</a>
-    <button class="btn btn-dark fas fa-bars"></button>
+    <a href="#/" style="padding-right:5%">Logo</a>
+    
     <div class="input-group mb-3">
       <input type="text" class="form-control" ng-model="search" placeholder="search" aria-label="Recipient's username"
         aria-describedby="basic-addon2">
@@ -52,28 +52,28 @@
 
   <div class="col">
       <div class="row">
-          <div ng-controller="appController" ng-show="isAdmin()" style="background-color: #1c2a48;width:15%; height: 100%;"
+          <div ng-controller="appController" ng-show="isAdmin()" style="background-color: #ffffff;border-right: 5px solid; width:15%; height: 100%;"
           class="wrapper">
       
           <!-- Sidebar -->
           <nav id="sidebar">
             <div class="sidebar-header">
-              <ul class="list-unstyled components">
-                <li style="height:5%"><a class="active" href="#/">Home</a></li>
-                <li style="height:5%"><a href="#/register">Register</a></li>
-              </ul>
+              <h1>-Admin-</h1>
             </div>
           </nav>
       
           <!-- Page Content -->
           <div id="content">
             <!-- We'll fill this with dummy content -->
-          
+            <ul class="list-unstyled components">
+              <li style="height:5%"><a style="color:black;"class="active" href="#/">Home</a></li>
+              <li style="height:5%"><a style="color:black;"href="#/register">Register</a></li>
+            </ul>
           </div>
-      
         </div>
-        <div class="row" ng-view>
-          </div>
+        
+      </div>
+      <div class="row" ng-view>
       </div>
   </div>
 

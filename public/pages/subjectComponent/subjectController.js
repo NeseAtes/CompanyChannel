@@ -15,11 +15,9 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams)
             comment:$scope.comment,
             subject_ID:subid
         }
-        console.log("data",data)
-        $http.post("http://localhost:3000/api/comment",data).then(function(response) {
-            console.log(response.data.data)
+        $http.post("http://localhost:3000/api/comment",JSON.stringify(data)).then(function(response) {
             if(response.data.data)
-                $window.alert("OK")
+                $window.location.reload();
         });
     }
 });
