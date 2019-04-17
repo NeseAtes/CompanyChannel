@@ -7,8 +7,10 @@ app.config(function($routeProvider,$locationProvider){
 });
 
 app.controller('subject_listController', function($scope, $http) {
+	console.log("girdi")
     $http.get("http://localhost:3000/api/subject")
     .then(function(response) {
+    	console.log("girdi")
         $scope.subjects=response.data.data;
     });
 });

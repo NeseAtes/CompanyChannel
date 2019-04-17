@@ -28,32 +28,22 @@
     transform: translateX(+500%);
   }
 </style>
-
-        <ul ng-controller="loginController">
-          <a style="color: white; background-color: #1c2a48; transform: translateX(+410%); margin-top: 10px" ng-if="!show" href="#/login" class="btn btn-md">Log in</a>
-          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px; font-size: 15px;"  ng-click="signout()" class="btn btn-md" id="log" ng-if="show" href="">Log out</a>
-        </ul>
-	    
-    </nav>
-    <div class="row" ng-view>
-
 <body>
   
   <nav ng-controller="appController" class="navbar navbar-expand-lg" style="background-color: #1c2a48;">
-    <a href="#/" style="padding-right:5%">Logo</a>
+    <a href="#/" style="padding-right: 5%">Logo</a>
     
-    <div class="input-group mb-3">
+    <div class="input-group ">
       <input type="text" class="form-control" ng-model="search" placeholder="search" aria-label="Recipient's username"
-        aria-describedby="basic-addon2">
+        aria-describedby="basic-addon1">
       <div class="input-group-append">
         <button ng-click="elasticsearch()" class="btn btn-outline-secondary" type="button">Button</button>
       </div>
     </div>
 
     <ul ng-controller="loginController">
-      <a style="color: white; background-color: #1c2a48;" ng-show="!show" href="#/login" class="btn btn-md">Log in</a>
-      <a style="color: white; background-color: #1c2a48;" ng-show="show" ng-click="signout()" class="btn btn-md">Log
-        out</a>
+      <a style="color: white; background-color: #1c2a48; margin-top: 10px; " ng-show="!show" href="#/login" class="btn btn-md">Login</a>
+      <a style="color: white; background-color: #1c2a48; margin-top: 10px;" ng-show="show" href="" ng-click="signout()" class="btn btn-md">Logout</a>
     </ul>
 
   </nav>
