@@ -2,6 +2,7 @@ var mainCtrl = require("./MainController");
 var tokenCtrl = require("./TokenController");
 var bcrypt = require('bcrypt');
 var addPersonnel = function (req, res, next) {
+    req.body["company_ID"]=res.locals.data.data.company_id;
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         req.body.password = hash;
         mainCtrl.addData("personnels", req, res, next);

@@ -24,8 +24,8 @@ module.exports = function(app) {
 	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
 	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
 
-	app.get('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
-	app.post('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
+	app.get('/api/personnels',TokenCtrl.adminControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
+	app.post('/api/personnels',TokenCtrl.adminControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
 
 	app.post('/api/createIndex',BaseController.InitSession,ElasticSearchCtrl.createIndex,BaseController.EndSession);
 
