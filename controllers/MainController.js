@@ -49,7 +49,7 @@ var getAll=function(tablename,conditions,req,res,next){
       myresult.forEach(element => {
         connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
         .toArray(function(err,rslt){
-          if(err) throw err;
+          if(err) throw err;          
           element["personnel_name"]=rslt[0].personnel_name;
           count++;
           if(count==myresult.length){

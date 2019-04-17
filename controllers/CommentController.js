@@ -5,7 +5,6 @@ var addComment = function(req,res,next){
 	req.body["date"]= Date();
 	req.body["company_ID"]=res.locals.data.data.company_id;
 	req.body["personnel_ID"]=res.locals.data.data.personnel_id;
-	//req.body["subject_ID"]=res.locals.data.data.subject_id;
 	mainCtrl.addData("comments",req,res,next);
 };
 

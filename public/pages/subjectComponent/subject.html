@@ -1,45 +1,40 @@
-<div class="container">
-	<div class="row">
-	<!-- Contenedor Principal -->
-    <div class="comments-container">
-			<a ng-repeat="sub in subject">
-				<span class="sub-heading">{{sub.subject}}</span>
-				<span class="subtopic_description">{{sub.description}}</span>
-				<span style="font-size: x-small"class="sub-heading">{{sub.personnel_name}}</span>
-			</a>
-		<ul id="comments-list" class="comments-list">
-			<li>
-				<div ng-repeat="comment in comments" class="comment-main-level">
-					<!-- Contenedor del Comentario -->
-					<div class="comment-box">
-						<div class="comment-head">
-							<h6 style="color: black"class="comment-name">{{comment.personnel_name}}</h6>
-							<span>{{comment.date}}</span>
-						</div>
-						<div class="comment-content">
-							{{comment.comment}}
-						</div>
-					</div>
-				</div>
-				
-			</li>
-		</ul>
-		
-		<div class="row">
-    
-				<div class="col-md-6">
-					<div class="widget-area no-padding blank">
-						<div class="status-upload">
-							<form>
-								<textarea ng-model="comment"placeholder="What is your comment?" ></textarea>
-								<button type="submit" ng-click="addComment()"class="btn btn-success green"><i class="fa fa-share"></i> Share</button>
-							</form>
-						</div><!-- Status Upload  -->
-					</div><!-- Widget Area -->
-				</div>
-					
-				</div>
-	</div>
+<style>
+	.container {
+		position: absolute;
+		left: 25%;
+		width: 50%;
+	}
 
-	</div>
+	li {
+		list-style-type: none;
+		width: 100%;
+	}
+
+	textarea {
+		width: 50%;
+	}
+</style>
+<div class="container">
+	
+		<li ng-repeat="sub in subject" class="box">
+			<h1>{{sub.subject}}</h1>
+			<p>{{sub.description}}</p>
+			<small>{{sub.personnel_name}}</small>
+			<small>{{sub.date}}</small>
+		</li>
+		<div ng-repeat="com in comments" class="row">
+			<li class="list-group-item list-group-item-light">
+				<h3>{{com.personnel_name}}</h3>
+				<p>{{com.comment}}</p>
+				<small>{{com.date}}</small>
+			</li>
+		</div>
+		<hr>
+		<div class="row">
+			<textarea ng-model="comment"></textarea>
+			<button class="btn btn-dark" ng-click="addComment(sub_id)">Share</button>
+		</div>
+	
+	<hr>
+
 </div>
