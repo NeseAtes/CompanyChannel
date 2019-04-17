@@ -11,7 +11,7 @@ app.controller('elasticController',function($scope, $http, SERVICE_URL,$window,$
     //$scope.logs=[];
     $scope.users=[];
         if ($routeParams.searchid == undefined) {
-            console.log("yazmadın??????????????????");
+            console.log("Boş arama yaptınız.");
         }
         else{
         $scope.users=[];

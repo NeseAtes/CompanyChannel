@@ -16,7 +16,8 @@ module.exports = function(app) {
 	app.post('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.addSubject,BaseController.EndSession);
 	app.get('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubject,BaseController.EndSession);
 	app.get('/api/subject/one',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getOneSubject,BaseController.EndSession);
-	
+	app.delete('/api/subject/:subject_ID',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
+
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
 	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
 	
@@ -29,6 +30,7 @@ module.exports = function(app) {
 	app.post('/api/createIndex',BaseController.InitSession,ElasticSearchCtrl.createIndex,BaseController.EndSession);
 
 	app.post('/api/elastic',TokenCtrl.tokenControl,BaseController.InitSession,ElasticSearchCtrl.search,BaseController.EndSession);
+	app.delete('/api/elastic/:_id',TokenCtrl.tokenControl, BaseController.InitSession, ElasticSearchCtrl.deleteDocument, BaseController.EndSession);
 
 	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };

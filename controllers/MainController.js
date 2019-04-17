@@ -50,7 +50,7 @@ var getAll=function(tablename,conditions,req,res,next){
         connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
         .toArray(function(err,rslt){
           if(err) throw err;
-          element["personnel_name"]=rslt.personnel_name;
+          element["personnel_name"]=rslt[0].personnel_name;
           count++;
           if(count==myresult.length){
             res.locals.data={data:myresult};
@@ -71,6 +71,45 @@ var updateData=function(tablename,query,newVal,res,next){
   });
 }
 
+var deleteData=function(tablename,id,req,res,next){
+  console.log("girdi");
+  var connection=res.locals.database;
+  connection.collection(tablename).deleteOne(id,function(err,result){
+    console.log("1");
+    if (err) {
+      throw err;
+    }
+    else{
+      //console.log("result",result)
+      console.log("2");
+      if (tablename=="subjects"){
+        console.log("insertId2",id);
+        esController.searchInner(id,function(err,result){
+          console.log("searchInner: ", err, result);
+          console.log("req_body",req.body);
+          if(err) {
+              res.locals.data = {
+                  data: false,
+                  error: err
+              }
+              next();
+          }else {
+              res.locals.data = {
+                  data: true
+              }
+              next();
+          }
+        });
+      }
+      res.locals.data={
+        data:true
+      };
+      next();
+    }
+  });
+}
+
 module.exports.addData=addData;
 module.exports.getAll=getAll;
 module.exports.updateData=updateData;
+module.exports.deleteData=deleteData;

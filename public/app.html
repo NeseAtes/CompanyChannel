@@ -23,9 +23,6 @@
 	text-decoration: none;
   	color: #d0d6e2;
   }
-  #sag{
-    transform: translateX(+500%);
-  }
 </style>
 <body>
     <nav ng-controller="appController" class="navbar navbar-expand-lg" style="background-color: #1c2a48;">
@@ -35,9 +32,9 @@
             <button ng-click="elasticsearch()">Search</button>
         </form>
 
-        <ul  ng-controller="loginController">
-          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px" ng-if="!show" href="#/login" class="btn btn-md">Log in</a>
-          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px; color: #d0d6e2; font-size: 15px;" ng-if="show" ng-click="signout()" class="btn btn-md">Log out</a>
+        <ul ng-controller="loginController">
+          <a style="color: white; background-color: #1c2a48; transform: translateX(+410%); margin-top: 10px" ng-if="!show" href="#/login" class="btn btn-md">Log in</a>
+          <a style="color: white; background-color: #1c2a48; transform: translateX(+375%); margin-top: 10px; font-size: 15px;"  ng-click="signout()" class="btn btn-md" id="log" ng-if="show" href="">Log out</a>
         </ul>
 	    
     </nav>

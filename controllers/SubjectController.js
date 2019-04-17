@@ -34,6 +34,12 @@ var getOneSubject=function(req,res,next) {
 	})
 }
 
+var deleteSubject=function(req,res,next){
+	var id={_id:new mongodb.ObjectId(req.params.subject_ID)};
+	mainCtrl.deleteData("subjects",id,req,res,next);
+}
+
 module.exports.addSubject=addSubject;
 module.exports.getSubject=getSubject;
 module.exports.getOneSubject=getOneSubject;
+module.exports.deleteSubject=deleteSubject;

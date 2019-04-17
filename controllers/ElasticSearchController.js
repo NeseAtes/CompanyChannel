@@ -1,4 +1,5 @@
 var elasticsearch =require('elasticsearch');
+var mongodb = require('mongodb');
 
 var client = new elasticsearch.Client({
 	host: 'localhost:9200',
@@ -92,8 +93,61 @@ var search = function(req,res,next){
 			}
 		}
 	}).then((body) =>{
-		console.log("result ->",body);
+		console.log("result ->",body.hits.hits[0]._id);
 		res.json(body.hits);
+
+	}, (error) => {
+		console.trace(error.message);
+	});
+};
+
+var deleteDocument = function(req,res,next){
+	client.delete({
+		index: 'company',
+		type: 'subjects',
+		id: req.params._id
+	}, function(err,resp){
+		if (err) {
+			console.log(err.message);
+		} else{
+			console.log('silindi',resp);
+			return res.json(resp)
+		}
+	})
+}
+
+var searchInner = function(subjectObject,cb){
+	console.log("subjectObject",subjectObject)
+	var value = subjectObject._id;
+	//var companyid = res.locals.data.data.company_id;
+	//console.log("companyid", companyid);
+	console.log("value",value);
+	client.search({
+		index: 'company',
+		type: 'subjects',
+		body:{
+			query:{
+				bool:{
+					must: [
+				    { "match": { "id": value }},
+  					]
+				}
+			}
+		}
+	}).then((body) =>{
+		console.log("result ->",body.hits);
+		client.delete({
+			index: 'company',
+			type: 'subjects',
+			id: body.hits.hits[0]._id
+		},function(err,resp){
+			if (err) {
+				console.log("silinmedi");
+				throw err;
+			} else{
+				console.log("silindi",resp)
+			}
+		})
 	}, (error) => {
 		console.trace(error.message);
 	});
@@ -102,3 +156,5 @@ var search = function(req,res,next){
 module.exports.createIndex=createIndex;
 module.exports.addDocumentInner=addDocumentInner;
 module.exports.search=search;
+module.exports.deleteDocument=deleteDocument;
+module.exports.searchInner=searchInner;

@@ -2,11 +2,8 @@
 	<div class="row">
 	<!-- Contenedor Principal -->
     <div class="comments-container">
-    	<h1>NEDEN</h1>
     	<ul>
-    		<a ng-repeat="sub in users" style="color:black;" href="#/subject/{{sub.id}}">
-    			{{sub.subject}}
-    		</a>
+            <a ng-repeat="sub in users" style="color:black;" href="#/subject/{{sub.id}}">{{sub.subject}}</a>
     		<a>{{sub.description}}</a>
     	</ul>	
 	</div>
