@@ -25,12 +25,9 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                 $location.path("/");
 
             }
-<<<<<<< HEAD
-=======
             else{
                 $window.alert("Lütfen bilgileri kontrol edin.")
             }
->>>>>>> 1726168377359d2195f5d2658c0bf99d2ecbd967
             if(response.data.is_admin){
 				$localStorage.is_admin=true;
             }
