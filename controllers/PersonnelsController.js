@@ -15,6 +15,8 @@ var getPersonnels = function (req, res, next) {
 var login = function (req, res, next) {
     var connection = res.locals.database;
     connection.collection("personnels").findOne({ email: req.body.email }, function (err, result) {
+        console.log(result)
+
         if (err) throw err;
         else if (result != null) {
             bcrypt.compare(req.body.password, result.password, function (err, reslt) {
@@ -36,6 +38,12 @@ var login = function (req, res, next) {
                     return res.send({ is_user: false, message: 'Please check the information' });
                 }
             });
+        }        
+        else{
+            res.locals.data={
+                is_user:false
+            }
+            next();
         }
     });
 }

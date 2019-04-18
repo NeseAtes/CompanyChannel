@@ -10,12 +10,13 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
         console.log($scope.show)
     }
 
-    $scope.login=function () {
-        var email=$scope.email;
+    $scope.login=function (isValid) {
+        console.log(isValid)
+        if(isValid){
+            var email=$scope.email;
         var password=$scope.password;
         $http.post("http://localhost:3000/login",{email:email,password:password})
         .then(function(response){
-            console.log(response)
             setTimeout(function(){
                 $window.location.reload();
             });
@@ -24,10 +25,19 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                 $location.path("/");
 
             }
+<<<<<<< HEAD
+=======
+            else{
+                $window.alert("Lütfen bilgileri kontrol edin.")
+            }
+>>>>>>> 1726168377359d2195f5d2658c0bf99d2ecbd967
             if(response.data.is_admin){
 				$localStorage.is_admin=true;
-			}
+            }
         });
+        }else{
+            $window.alert("Tüm alanları doldurun.")
+        }
     }
 
     $scope.signout=function(){
