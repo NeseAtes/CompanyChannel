@@ -8,20 +8,35 @@
     position: absolute;
     left: 25%;
     width: 50%;
-    padding-top: 5%;
+    padding-top: 2%;
   }
 </style>
-<div class="container-fluid">
-  <div class="subjectlist">
-    <div ng-repeat="sub in subjects">
-      <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a style="color: black"href="#/subject/{{sub._id}}"><b>{{sub.subject}}</b></a>
-            <small>{{sub.personnel_name}}-{{sub.date}}</small>
-          <span class="badge badge-primary badge-pill">{{sub.count}} view</span>
-        </li>
-      </ul>
+    <div ng-show="users()" class="container">
+      <div>
+        <div class="subjectlist">
+        <div>
+          <a class="btn btn-outline-secondary" style="float: right; background-color: #1c2a48; color: white; font-weight: bold; font-family: serif;" href="#/subjectAdd">ADD</a>
 
+          <h1 style="color: #1c2a48; font-family: serif;">Questions</h1>
+        </div>
+        <hr>
+        <div ng-repeat="sub in subjects | reverse">
+          <ul>
+            <hr>
+            <div >
+                <a style="color: black; font-family: cursive; " href="#/subject/{{sub._id}}">{{sub.subject}}</a>
+                <br>
+                <small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>  
+                <br>
+
+                <small style="float: right; font-family: monospace;">{{sub.date}}</small>              
+                
+                <span class="badge badge-danger badge-pill">{{sub.count}} view</span>   
+            </div>
+          </ul>
+        </div>
+       <hr>
+
+      </div>
+      </div>
     </div>
-  </div>
-</div>

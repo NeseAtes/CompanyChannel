@@ -20,9 +20,10 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                 $window.location.reload();
             });
             if(response.data.is_user==true){
+                $localStorage.is_user=true;
                 $location.path("/");
+
             }
-            console.log(response.data) 
             if(response.data.is_admin){
 				$localStorage.is_admin=true;
 			}

@@ -3,38 +3,43 @@
 		position: absolute;
 		left: 25%;
 		width: 50%;
+		padding-top: 2%;
 	}
 
 	li {
 		list-style-type: none;
 		width: 100%;
 	}
-
 	textarea {
 		width: 50%;
 	}
 </style>
 <div class="container">
-	
-		<li ng-repeat="sub in subject" class="box">
-			<h1>{{sub.subject}}</h1>
-			<p>{{sub.description}}</p>
-			<small>{{sub.personnel_name}}</small>
-			<small>{{sub.date}}</small>
-		</li>
-		<div ng-repeat="com in comments" class="row">
-			<li class="list-group-item list-group-item-light">
-				<h3>{{com.personnel_name}}</h3>
-				<p>{{com.comment}}</p>
-				<small>{{com.date}}</small>
-			</li>
+	<li ng-repeat="sub in subject" class="box">
+		<h1 style="color: black; font-family: cursive;">{{sub.subject}}</h1>
+		<br>
+		<div>
+			<pre style="font-family: sans-serif; font-size: 20px">{{sub.description}}</pre>
 		</div>
-		<hr>
-		<div class="row">
-			<textarea ng-model="comment"></textarea>
-			<button class="btn btn-dark" ng-click="addComment(sub_id)">Share</button>
-		</div>
-	
+		
+		<small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>
+		<br>
+		<small style="float: right; font-family: monospace;">{{sub.date}}</small>
+	</li>
+	<br>
 	<hr>
-
+	<div ng-repeat="com in comments" class="row">
+		<li class="list-group-item list-group-item">
+			<pre style="font-family: serif; font-size: 18px">{{com.comment}}</pre>
+			<small style="float: right; font-family: sans-serif;">{{com.personnel_name}}</small>
+			<br>
+			<small style="float: right; font-family: monospace;">{{com.date}}</small>
+		</li>
+	</div>
+	<hr>
+	<div class="row d-flex justify-content-end">
+		<textarea ng-model="comment" ></textarea>
+		<button class="btn btn-dark" ng-click="addComment(sub_id)">Share</button>
+	</div>
+	<hr>
 </div>

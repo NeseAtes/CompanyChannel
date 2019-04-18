@@ -1,5 +1,4 @@
 app.controller('registerController', function ($scope, $http, $location, $window, SERVICE_URL) {
-    $scope.submitted=true;
     $scope.register = function (isValid) {
         var data = {
             name:$scope.name,
@@ -15,7 +14,7 @@ app.controller('registerController', function ($scope, $http, $location, $window
             });
         }
         else{
-            $window.alert("Boş alanları doldurun")
+            $window.alert("Boş alanları doldurun");
         }
     }
 });

@@ -72,21 +72,17 @@ var updateData=function(tablename,query,newVal,res,next){
 }
 
 var deleteData=function(tablename,id,req,res,next){
-  console.log("girdi");
   var connection=res.locals.database;
   connection.collection(tablename).deleteOne(id,function(err,result){
-    console.log("1");
     if (err) {
       throw err;
     }
     else{
-      //console.log("result",result)
-      console.log("2");
       if (tablename=="subjects"){
-        console.log("insertId2",id);
+        //console.log("insertId2",id);
         esController.searchInner(id,function(err,result){
           console.log("searchInner: ", err, result);
-          console.log("req_body",req.body);
+          //console.log("req_body",req.body);
           if(err) {
               res.locals.data = {
                   data: false,

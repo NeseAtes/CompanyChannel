@@ -30,27 +30,6 @@ var createIndex = function(req,res,next){
 	});
 }
 
-var addDocument = function(req,res,next){
-	client.index({
-		index: 'company',
-		type: 'subjects',
-		id:req.body.id,
-		body:{
-			subject: req.body.subject,
-			description: req.body.description,
-			date: Date(),
-			onay: false
-		}
-	}).then(function(resp){
-		console.log("add document");
-		res.status(200)
-		return res.json(resp)
-	},function(err){
-		console.log("error ->",err);
-		return res.json(err);
-	});
-};
-
 var addDocumentInner = function(subObject,cb){
 	client.index({
 		index: 'company',
@@ -77,8 +56,6 @@ var addDocumentInner = function(subObject,cb){
 var search = function(req,res,next){
 	var value = req.query.value || req.body.value ||'';
 	var companyid = res.locals.data.data.company_id;
-	console.log("companyid", companyid);
-	console.log("value",value);
 	client.search({
 		index: 'company',
 		type: 'subjects',
@@ -93,7 +70,7 @@ var search = function(req,res,next){
 			}
 		}
 	}).then((body) =>{
-		console.log("result ->",body.hits.hits[0]._id);
+		//console.log("result ->",body);
 		res.json(body.hits);
 
 	}, (error) => {
@@ -135,7 +112,7 @@ var searchInner = function(subjectObject,cb){
 			}
 		}
 	}).then((body) =>{
-		console.log("result ->",body.hits);
+		//console.log("result ->",body.hits);
 		client.delete({
 			index: 'company',
 			type: 'subjects',
