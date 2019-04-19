@@ -46,6 +46,7 @@ var getAll=function(tablename,conditions,req,res,next){
     var connection=res.locals.database;
     var myresult=[];
     var count=0;
+    console.log(conditions)
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
         if(err) throw err;
         myresult=result;
