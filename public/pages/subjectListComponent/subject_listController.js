@@ -25,8 +25,4 @@ app.controller('subject_listController', function($scope, $http, $localStorage) 
       console.log("response",response);
         $scope.subjects=response.data.data;
     });
-}).filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  };
 });

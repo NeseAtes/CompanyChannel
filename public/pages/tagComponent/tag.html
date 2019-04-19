@@ -1,0 +1,44 @@
+<style>
+  div.row.box {
+    background-color: rgb(209, 208, 208);
+    border-style: groove;
+  }
+
+  .subjectlist {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    padding-top: 2%;
+  }
+  .renk:hover{
+    color: black;
+  }
+</style>
+  <div class="container">
+    <div>
+      <div class="subjectlist">
+      <div>
+        <h1 style="color: #1c2a48; font-family: serif;">Tags</h1>
+      </div>
+      <hr>
+      <div ng-repeat="sub in tags">
+        <ul>
+          <hr>
+          <div >
+              <a style="color: black; font-family: cursive; " href="#/subject/{{sub._id}}">{{sub.subject}}</a>
+              <br>
+              <small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>  
+              <br>
+
+              <small style="float: right; font-family: monospace;">{{sub.date}}</small>              
+              
+              <span class="badge badge-danger badge-pill">{{sub.count}} view</span> 
+              <a style="background-color: #5e92f3;" class="renk" href="#/tag/{{sub.tags[0]}}">{{sub.tags[0]}}</a>  
+          </div>
+        </ul>
+      </div>
+     <hr>
+
+    </div>
+    </div>
+  </div>

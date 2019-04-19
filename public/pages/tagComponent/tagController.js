@@ -5,5 +5,6 @@ app.controller('tagController', function($scope, $http, $localStorage,$routePara
     .then(function(response) {
       console.log("response2",response);
       $scope.tags=response.data.data
+      console.log("$scope.tags",$scope.tags);
     });
 });
