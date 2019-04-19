@@ -21,7 +21,7 @@ var isExist_tag=function(subject,tag,res,next) {
                 mainCtrl.updateData("subjects",qData,subject,res,next);
             });
         }else{
-            subject.tags.push(result._id);
+            subject.tags.push(result.tag);
             mainCtrl.updateData("subjects",qData,subject,res,next);
         }
     });
