@@ -17,6 +17,7 @@ module.exports = function(app) {
 	app.post('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.addSubject,BaseController.EndSession);
 	app.get('/api/subject',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubject,BaseController.EndSession);
 	app.get('/api/subject/one',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getOneSubject,BaseController.EndSession);
+	app.get('/api/subject/tag',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubjectsforTag,BaseController.EndSession);
 	app.delete('/api/subject/:subject_ID',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
 
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);

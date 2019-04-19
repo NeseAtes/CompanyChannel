@@ -6,7 +6,10 @@ app.config(function($routeProvider,$locationProvider){
     }).when('/subjectAdd', {
       templateUrl: './pages/subjectAddComponent/subjectAdd.html',
       controller: 'subjectAddController'
-    });
+    }).when('/tag/:tag', {
+      templateUrl: './pages/tagComponent/tag.html',
+      controller: 'tagController'
+    });;
 });
 
 

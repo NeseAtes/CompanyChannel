@@ -72,6 +72,15 @@ var getOneSubject = function (req, res, next) {
 		mainCtrl.updateData("subjects", condition, newVal, res, next);
 	})
 }
+var getSubjectsforTag=function(req,res,next) {
+	console.log("geldi",req.query.tag);
+	var company_id = res.locals.data.data.company_id;
+	var condition = {
+		company_ID: company_id,
+		tags:req.query.tag
+	}
+	mainCtrl.getAll("subjects", condition, req, res, next);
+}
 
 var deleteSubject=function(req,res,next){
 	var id={_id:new mongodb.ObjectId(req.params.subject_ID)};
@@ -83,3 +92,4 @@ module.exports.getSubject=getSubject;
 module.exports.getOneSubject=getOneSubject;
 module.exports.deleteSubject=deleteSubject;
 module.exports.getPersonnelSubjects=getPersonnelSubjects;
+module.exports.getSubjectsforTag=getSubjectsforTag;
