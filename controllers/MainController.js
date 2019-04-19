@@ -15,7 +15,7 @@ var addData=function(tablename,req,res,next){
           tagCtrl.isExist_tag(result.ops[0],element,res,next);
         });
 
-        req.body.insertId=result._id;
+        //req.body.insertId=result._id;
         //console.log("insertId",result.insertedId);
         //console.log("insertId2",req.body.insertId);
         esController.addDocumentInner(req.body,function(err,result){

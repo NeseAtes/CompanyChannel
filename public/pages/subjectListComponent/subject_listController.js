@@ -19,6 +19,7 @@ app.controller('subject_listController', function($scope, $http, $localStorage) 
 
     $http.get("http://localhost:3000/api/subject")
     .then(function(response) {
+      console.log("response",response);
         $scope.subjects=response.data.data;
     });
 }).filter('reverse', function() {
