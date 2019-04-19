@@ -2,13 +2,32 @@ var mainCtrl = require('./MainController');
 var mongodb = require('mongodb');
 var moment = require('moment');
 
+var parseForTag=function(companyid,description) {
+	var arr = description.split("#");
+	var tagjsons=[];
+	arr.shift();
+	arr.forEach(element => {
+		var a=element.split(' ');
+		var tagjson={
+			"company_ID":companyid,
+			"tag":a[0]
+		}
+		tagjsons.push(tagjson);
+	});
+	return tagjsons;
+}
+
 var addSubject = function (req, res, next) {//req.tag json gönder
-	req.body["company_ID"] = res.locals.data.data.company_id;
+	var companyid=res.locals.data.data.company_id;
+	req.body["company_ID"] = companyid;
 	req.body["personnel_ID"] = res.locals.data.data.personnel_id;
 	req.body["date"] = moment().format('MMMM Do YYYY, h:mm:ss a');
 	req.body["onay"] = false;
 	req.body["count"] = 0;
 	req.body["tags"]=[];
+
+	req.tag=parseForTag(companyid,req.body.description);
+	
 	mainCtrl.addData("subjects", req, res, next);
 };
 

@@ -11,7 +11,10 @@ var addData=function(tablename,req,res,next){
     }
     else{
       if (tablename=="subjects"){
-        tagCtrl.isExist_tag(result.ops[0],req.tag,res,next);
+        req.tag.forEach(element => {
+          tagCtrl.isExist_tag(result.ops[0],element,res,next);
+        });
+
         req.body.insertId=result._id;
         //console.log("insertId",result.insertedId);
         //console.log("insertId2",req.body.insertId);
