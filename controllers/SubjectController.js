@@ -2,12 +2,13 @@ var mainCtrl = require('./MainController');
 var mongodb = require('mongodb');
 var moment = require('moment');
 
-var addSubject = function (req, res, next) {
+var addSubject = function (req, res, next) {//req.tag json gönder
 	req.body["company_ID"] = res.locals.data.data.company_id;
 	req.body["personnel_ID"] = res.locals.data.data.personnel_id;
 	req.body["date"] = moment().format('MMMM Do YYYY, h:mm:ss a');
 	req.body["onay"] = false;
 	req.body["count"] = 0;
+	req.body["tags"]=[];
 	mainCtrl.addData("subjects", req, res, next);
 };
 

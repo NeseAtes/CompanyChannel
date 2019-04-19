@@ -1,4 +1,5 @@
 var esController = require("./ElasticSearchController");
+var tagCtrl = require("./TagController");
 var mongodb = require('mongodb');
 
 var addData=function(tablename,req,res,next){
@@ -10,6 +11,7 @@ var addData=function(tablename,req,res,next){
     }
     else{
       if (tablename=="subjects"){
+        tagCtrl.isExist_tag(result.ops[0],req.tag,res,next);
         req.body.insertId=result._id;
         //console.log("insertId",result.insertedId);
         //console.log("insertId2",req.body.insertId);
@@ -63,6 +65,8 @@ var getAll=function(tablename,conditions,req,res,next){
 }
 var updateData=function(tablename,query,newVal,res,next){
   var connection=res.locals.database;
+  console.log("update",query)
+  console.log("update",newVal)
   connection.collection(tablename).update(query,newVal,function(err,result){
     if(err) throw err;
     else{
