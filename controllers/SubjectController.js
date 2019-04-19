@@ -3,7 +3,7 @@ var mongodb = require('mongodb');
 var moment = require('moment');
 
 var parseForTag=function(companyid,description) {
-	var arr = description.split("#");
+	var arr = description.split(" #");
 	var tagjsons=[];
 	arr.shift();
 	arr.forEach(element => {

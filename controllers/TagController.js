@@ -15,6 +15,7 @@ var isExist_tag=function(subject,tag,res,next) {
         if(err) throw err;
         var qData={_id:new mongodb.ObjectId(subject._id)};
         if(result==null){
+            tag["count"]=1;
             connection.collection("tags").insertOne(tag,function(err,rslt){
                 if(err) throw err;
                 subject.tags.push(rslt.ops[0].tag);
@@ -22,6 +23,8 @@ var isExist_tag=function(subject,tag,res,next) {
             });
         }else{
             subject.tags.push(result.tag);
+            result["count"]=result.count+1;
+            mainCtrl.updateData("tags",{tag:result.tag},result,res,next);
             mainCtrl.updateData("subjects",qData,subject,res,next);
         }
     });
