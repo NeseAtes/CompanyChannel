@@ -16,13 +16,33 @@ var parseForTag=function(companyid,description) {
 	});
 	return tagjsons;
 }
+var solved=function(req,res,next) {
+	var connection = res.locals.database;
+	var subject_id=req.body.subject_ID;
+	var present_personnel=res.locals.data.data.personnel_id;
+	var condition={
+		_id:new mongodb.ObjectId(subject_id)
+	};
+	connection.collection("subjects").findOne(condition,function (err,result) {
+		if(err) throw err;
+		if(result.personnel_ID==present_personnel){
+			result["isOk"]=true;
+			mainCtrl.updateData("subjects",condition,result,res,next);
+		}else{
+			res.locals.data={
+				isok:false
+			}
+			next();
+		}		
+	});
+}
 
 var addSubject = function (req, res, next) {//req.tag json gönder
 	var companyid=res.locals.data.data.company_id;
 	req.body["company_ID"] = companyid;
 	req.body["personnel_ID"] = res.locals.data.data.personnel_id;
 	req.body["date"] = moment().format('MMMM Do YYYY, h:mm:ss a');
-	req.body["onay"] = false;
+	req.body["isOk"] = false;
 	req.body["count"] = 0;
 	req.body["tags"]=[];
 
@@ -93,3 +113,4 @@ module.exports.getOneSubject=getOneSubject;
 module.exports.deleteSubject=deleteSubject;
 module.exports.getPersonnelSubjects=getPersonnelSubjects;
 module.exports.getSubjectsforTag=getSubjectsforTag;
+module.exports.solved=solved;
