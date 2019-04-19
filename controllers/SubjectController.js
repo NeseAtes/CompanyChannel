@@ -2,12 +2,32 @@ var mainCtrl = require('./MainController');
 var mongodb = require('mongodb');
 var moment = require('moment');
 
-var addSubject = function (req, res, next) {
-	req.body["company_ID"] = res.locals.data.data.company_id;
+var parseForTag=function(companyid,description) {
+	var arr = description.split("#");
+	var tagjsons=[];
+	arr.shift();
+	arr.forEach(element => {
+		var a=element.split(' ');
+		var tagjson={
+			"company_ID":companyid,
+			"tag":a[0]
+		}
+		tagjsons.push(tagjson);
+	});
+	return tagjsons;
+}
+
+var addSubject = function (req, res, next) {//req.tag json gönder
+	var companyid=res.locals.data.data.company_id;
+	req.body["company_ID"] = companyid;
 	req.body["personnel_ID"] = res.locals.data.data.personnel_id;
 	req.body["date"] = moment().format('MMMM Do YYYY, h:mm:ss a');
 	req.body["onay"] = false;
 	req.body["count"] = 0;
+	req.body["tags"]=[];
+
+	req.tag=parseForTag(companyid,req.body.description);
+	
 	mainCtrl.addData("subjects", req, res, next);
 };
 
@@ -15,10 +35,9 @@ var getSubject = function (req, res, next) {
 	var connection = res.locals.database;
 	var company_id = res.locals.data.data.company_id;
 	var condition = {
-		company_ID: company_id,
-		subject_ID: req.query.subject_ID
+		company_ID: company_id
 	}
-	connection.collection('subjects').find().limit(5).sort({_id: -1}).toArray(function(err,result){
+	connection.collection('subjects').find(condition).limit(5).sort({_id: -1}).toArray(function(err,result){
 		if (err) {
 			console.log("err",err);
 		}
@@ -29,6 +48,13 @@ var getSubject = function (req, res, next) {
 			next();
 		}
 	});
+}
+var getPersonnelSubjects=function(req,res,next){
+	var condition = {
+		company_ID: res.locals.data.data.company_id,
+		personnel_ID:res.locals.data.data.personnel_id
+	}
+	mainCtrl.getAll("subjects", condition, req, res, next);
 }
 var getOneSubject = function (req, res, next) {
 	var company_id = res.locals.data.data.company_id;
@@ -56,3 +82,4 @@ module.exports.addSubject=addSubject;
 module.exports.getSubject=getSubject;
 module.exports.getOneSubject=getOneSubject;
 module.exports.deleteSubject=deleteSubject;
+module.exports.getPersonnelSubjects=getPersonnelSubjects;
