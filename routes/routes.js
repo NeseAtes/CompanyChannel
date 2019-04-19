@@ -7,6 +7,7 @@ var PersonnelsCtrl= require("../controllers/PersonnelsController");
 var ElasticSearchCtrl =require("../controllers/ElasticSearchController");
 var HomeCtrl= require("../controllers/HomeController");
 var TokenCtrl=require("../controllers/TokenController");
+var TagCtrl=require("../controllers/TagController");
 
 module.exports = function(app) {
 	app.use(cookieParser())
@@ -31,6 +32,9 @@ module.exports = function(app) {
 
 	app.post('/api/elastic',TokenCtrl.tokenControl,BaseController.InitSession,ElasticSearchCtrl.search,BaseController.EndSession);
 	app.delete('/api/elastic/:_id',TokenCtrl.tokenControl, BaseController.InitSession, ElasticSearchCtrl.deleteDocument, BaseController.EndSession);
+
+	app.post('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.addTag,BaseController.EndSession);
+	app.get('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.getAllTag,BaseController.EndSession);
 
 	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };
