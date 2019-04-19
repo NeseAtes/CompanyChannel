@@ -51,7 +51,7 @@
   </nav>
 </div>
   <div ng-controller="appController" class="col-lg-12">
-      <div ng-show="isAdmin()" class="row">
+      <div class="row">
           <div style="background-color: #ffffff; border-color: #1c2a48; border-right: 2px solid; width:15%; height: 100%"
           class="wrapper">
       
@@ -68,7 +68,8 @@
             <!-- We'll fill this with dummy content -->
             <ul class="list-unstyled components">
               <li style="height:5%"><a style="color:#1c2a48;"class="active" href="#/"> <i style="font-size: 18px" class="fas fa-home"> Home </i></a></li>
-              <li style="height:5%"><a style="color:#1c2a48;"href="#/register"> <i style="font-size: 18px" class="fas fa-user-circle"> Register </i></a></li>
+              <li style="height:5%"><a style="color:#1c2a48;"class="active" href="#/user"> <i style="font-size: 18px" class="fas fa-users"> Users </i></a></li>
+              <li style="height:5%"><a style="color:#1c2a48;" ng-show="isAdmin()"  href="#/register"> <i style="font-size: 18px" class="fas fa-user-circle"> Register </i></a></li>
             </ul>
           </div>
         </div>

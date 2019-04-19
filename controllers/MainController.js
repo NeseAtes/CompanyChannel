@@ -47,9 +47,8 @@ var getAll=function(tablename,conditions,req,res,next){
     var count=0;
     console.log(conditions)
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
-        if(err) throw err;
-        myresult=result;
-        
+      if(err) throw err;
+      myresult=result;
     if(tablename=="comments"||tablename=="subjects"){
       myresult.forEach(element => {
         connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
@@ -64,6 +63,10 @@ var getAll=function(tablename,conditions,req,res,next){
         });
       });
     }
+    res.locals.data={
+      data: result
+    }
+    next();
     });
 }
 var updateData=function(tablename,query,newVal,res,next){

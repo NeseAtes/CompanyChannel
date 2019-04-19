@@ -19,6 +19,7 @@ module.exports = function(app) {
 	app.get('/api/subject/one',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getOneSubject,BaseController.EndSession);
 	app.get('/api/subject/tag',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubjectsforTag,BaseController.EndSession);
 	app.delete('/api/subject/:subject_ID',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
+	app.get('/api/subject/personnel',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.getPersonnelSubjects, BaseController.EndSession);
 
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
 	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
@@ -26,7 +27,7 @@ module.exports = function(app) {
 	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
 	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
 
-	app.get('/api/personnels',TokenCtrl.adminControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
+	app.get('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
 	app.post('/api/personnels',TokenCtrl.adminControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
 
 	app.post('/api/createIndex',BaseController.InitSession,ElasticSearchCtrl.createIndex,BaseController.EndSession);
