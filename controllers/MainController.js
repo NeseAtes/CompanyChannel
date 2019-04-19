@@ -68,8 +68,6 @@ var getAll=function(tablename,conditions,req,res,next){
 }
 var updateData=function(tablename,query,newVal,res,next){
   var connection=res.locals.database;
-  console.log("update",query)
-  console.log("update",newVal)
   connection.collection(tablename).update(query,newVal,function(err,result){
     if(err) throw err;
     else{

@@ -17,8 +17,8 @@ var isExist_tag=function(subject,tag,res,next) {
         if(result==null){
             connection.collection("tags").insertOne(tag,function(err,rslt){
                 if(err) throw err;
-                console.log("1",rslt.insertedId)
-                subject.tags.push(rslt.insertedId);
+                console.log("1",rslt.ops[0])
+                subject.tags.push(rslt.ops[0].tag);
                 mainCtrl.updateData("subjects",qData,subject,res,next);
             });
         }else{

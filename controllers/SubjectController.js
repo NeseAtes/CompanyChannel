@@ -35,10 +35,9 @@ var getSubject = function (req, res, next) {
 	var connection = res.locals.database;
 	var company_id = res.locals.data.data.company_id;
 	var condition = {
-		company_ID: company_id,
-		subject_ID: req.query.subject_ID
+		company_ID: company_id
 	}
-	connection.collection('subjects').find().limit(5).sort({_id: -1}).toArray(function(err,result){
+	connection.collection('subjects').find(condition).limit(5).sort({_id: -1}).toArray(function(err,result){
 		if (err) {
 			console.log("err",err);
 		}
@@ -49,6 +48,13 @@ var getSubject = function (req, res, next) {
 			next();
 		}
 	});
+}
+var getPersonnelSubjects=function(req,res,next){
+	var condition = {
+		company_ID: res.locals.data.data.company_id,
+		personnel_ID:res.locals.data.data.personnel_id
+	}
+	mainCtrl.getAll("subjects", condition, req, res, next);
 }
 var getOneSubject = function (req, res, next) {
 	var company_id = res.locals.data.data.company_id;
@@ -76,3 +82,4 @@ module.exports.addSubject=addSubject;
 module.exports.getSubject=getSubject;
 module.exports.getOneSubject=getOneSubject;
 module.exports.deleteSubject=deleteSubject;
+module.exports.getPersonnelSubjects=getPersonnelSubjects;
