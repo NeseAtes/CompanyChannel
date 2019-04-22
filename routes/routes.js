@@ -24,7 +24,9 @@ module.exports = function(app) {
 
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
 	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
-	
+	app.post('/api/comment/update',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.updateComment,BaseController.EndSession);
+	app.delete('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.deleteComment,BaseController.EndSession);
+
 	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
 	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
 
