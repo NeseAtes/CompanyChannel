@@ -105,6 +105,8 @@ var getSubjectsforTag=function(req,res,next) {
 var deleteSubject=function(req,res,next){
 	var id={_id:new mongodb.ObjectId(req.params.subject_ID)};
 	mainCtrl.deleteData("subjects",id,req,res,next);
+	var connection = res.locals.database;
+	connection.collection("comments").deleteMany({subject_ID:req.params.subject_ID});
 }
 
 module.exports.addSubject=addSubject;

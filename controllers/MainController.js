@@ -100,7 +100,6 @@ var deleteData=function(tablename,id,req,res,next){
     }
     else{
       if (tablename=="subjects"){
-        
         esController.searchInner(id,function(err,result){
           console.log("searchInner: ", err, result);
           
