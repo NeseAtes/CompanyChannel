@@ -64,6 +64,11 @@ var getAll=function(tablename,conditions,req,res,next){
         });
       });
     }
+    else{
+      res.locals.data={data:myresult};
+      next();
+    }
+    
     });
 }
 var updateData=function(tablename,query,newVal,res,next){

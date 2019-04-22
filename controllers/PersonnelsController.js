@@ -1,6 +1,8 @@
 var mainCtrl = require("./MainController");
 var tokenCtrl = require("./TokenController");
 var bcrypt = require('bcrypt');
+var mongodb = require('mongodb');
+
 var addPersonnel = function (req, res, next) {
     req.body["company_ID"]=res.locals.data.data.company_id;
     bcrypt.hash(req.body.password, 10, function (err, hash) {
@@ -10,7 +12,13 @@ var addPersonnel = function (req, res, next) {
 }
 var getPersonnels = function (req, res, next) {
     var company_id = res.locals.data.data.company_id;
-    mainCtrl.getAll("personnels", { company_ID: company_id }, req, res, next);
+    var conditions={
+        company_ID: company_id
+    }
+    if(req.query.personnel_ID!=undefined)
+        conditions["_id"]=new mongodb.ObjectId(req.query.personnel_ID)
+
+    mainCtrl.getAll("personnels", conditions, req, res, next);
 }
 var login = function (req, res, next) {
     var connection = res.locals.database;
