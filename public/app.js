@@ -17,6 +17,9 @@ app.config(function($routeProvider,$locationProvider){
   }).when('/register',{
     templateUrl: './pages/registerComponent/register.html',
     controller: 'registerController'
+  }).when('/personnel',{
+    templateUrl: './pages/personnelComponent/personnel.html',
+    controller: 'personnelController'
   });
 });
 

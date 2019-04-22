@@ -9,7 +9,7 @@ app.config(function($routeProvider,$locationProvider){
     }).when('/tag/:tag', {
       templateUrl: './pages/tagComponent/tag.html',
       controller: 'tagController'
-    });;
+    });
 });
 
 
