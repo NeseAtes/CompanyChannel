@@ -1,5 +1,6 @@
 var mainCtrl = require('./MainController');
 var moment = require('moment');
+var mongodb = require('mongodb');
 
 var addComment = function(req,res,next){
 	
@@ -15,6 +16,42 @@ var getComment = function(req,res,next){
 	}
 	mainCtrl.getAll("comments",condition,req,res,next);
 };
-
+var updateComment=function(req,res,next){ //sadece yorum yapan düzenleyebilir/silebilir
+	var condition={
+		_id:new mongodb.ObjectId(req.body.comment_ID)
+	}
+	var connection=res.locals.database;
+	connection.collection("comments").findOne(condition,function(err,result){
+		if(result.personnel_ID==res.locals.data.data.personnel_id){
+			result["comment"]=req.body.new_comment;
+			mainCtrl.updateData("comments",condition,result,res,next);
+		}
+		else{
+			res.locals.data={
+				data:false
+			};
+			next();
+		}
+	});	
+}
+var deleteComment=function(req,res,next) {
+	var condition={
+		_id:new mongodb.ObjectId(req.body.comment_ID)
+	}
+	var connection=res.locals.database;
+	connection.collection("comments").findOne(condition,function(err,result){
+		if(result.personnel_ID==res.locals.data.data.personnel_id){
+			mainCtrl.deleteData("comments",condition,req,res,next);
+		}
+		else{
+			res.locals.data={
+				data:false
+			};
+			next();
+		}
+	});
+}
 module.exports.addComment=addComment;
 module.exports.getComment=getComment;
+module.exports.updateComment=updateComment;
+module.exports.deleteComment=deleteComment;

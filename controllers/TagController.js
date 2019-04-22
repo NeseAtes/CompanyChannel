@@ -22,7 +22,8 @@ var isExist_tag=function(subject,tag,res,next) {
                 mainCtrl.updateData("subjects",qData,subject,res,next);
             });
         }else{
-            subject.tags.push(result.tag);
+            if(!subject.tags.includes(result.tag))
+                subject.tags.push(result.tag);
             result["count"]=result.count+1;
             mainCtrl.updateData("tags",{tag:result.tag},result,res,next);
             mainCtrl.updateData("subjects",qData,subject,res,next);

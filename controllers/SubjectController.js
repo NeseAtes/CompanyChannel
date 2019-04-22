@@ -87,14 +87,13 @@ var getOneSubject = function (req, res, next) {
 	var connection = res.locals.database;
 	connection.collection("subjects").find(condition).toArray(function (err, result) {
 		var newVal = result[0];
-		//console.log("1", newVal.count)
+		
 		newVal["count"] = newVal.count + 1;
-		//console.log(newVal)
+		
 		mainCtrl.updateData("subjects", condition, newVal, res, next);
 	})
 }
 var getSubjectsforTag=function(req,res,next) {
-	console.log("geldi",req.query.tag);
 	var company_id = res.locals.data.data.company_id;
 	var condition = {
 		company_ID: company_id,

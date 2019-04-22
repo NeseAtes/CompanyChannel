@@ -14,9 +14,7 @@ var addData=function(tablename,req,res,next){
         req.tag.forEach(element => {
           tagCtrl.isExist_tag(result.ops[0],element,res,next);
         });
-        //req.body.insertId=result._id;
-        //console.log("insertId",result.insertedId);
-        //console.log("insertId2",req.body.insertId);
+        
         esController.addDocumentInner(req.body,function(err,result){
           console.log("addDocumentInner: ", err, result);
           console.log("req_body",req.body);
@@ -45,7 +43,7 @@ var getAll=function(tablename,conditions,req,res,next){
     var connection=res.locals.database;
     var myresult=[];
     var count=0;
-    console.log(conditions)
+    
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
         if(err) throw err;
         myresult=result;
@@ -92,10 +90,10 @@ var deleteData=function(tablename,id,req,res,next){
     }
     else{
       if (tablename=="subjects"){
-        //console.log("insertId2",id);
+        
         esController.searchInner(id,function(err,result){
           console.log("searchInner: ", err, result);
-          //console.log("req_body",req.body);
+          
           if(err) {
               res.locals.data = {
                   data: false,

@@ -7,7 +7,24 @@ var addPersonnel = function (req, res, next) {
     req.body["company_ID"]=res.locals.data.data.company_id;
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         req.body.password = hash;
-        mainCtrl.addData("personnels", req, res, next);
+        var connection = res.locals.database;
+        var conditions={
+            email:req.body.email,
+            personnel_name:req.body.personnel_name
+        }
+        connection.collection("personnels").findOne(conditions,function(err,result) {
+            if(err) throw err;
+            if(result==null){
+                mainCtrl.addData("personnels", req, res, next);
+            }
+            else{
+                res.locals.data={
+                    data:false,
+                    message:"this personnel is already saved"
+                }
+                next();
+            }
+        });        
     });
 }
 var getPersonnels = function (req, res, next) {
@@ -23,15 +40,14 @@ var getPersonnels = function (req, res, next) {
 var login = function (req, res, next) {
     var connection = res.locals.database;
     connection.collection("personnels").findOne({ email: req.body.email }, function (err, result) {
-        console.log(result)
-
         if (err) throw err;
         else if (result != null) {
             bcrypt.compare(req.body.password, result.password, function (err, reslt) {
                 if (reslt) {
                     var personnel = {
                         personnel_id: result._id,
-                        company_id: result.company_ID
+                        company_id: result.company_ID,
+                        role:result.role
                     };
                     var token = tokenCtrl.token(personnel);
                     res.cookie('auth', token);
