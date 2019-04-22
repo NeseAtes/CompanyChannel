@@ -54,7 +54,11 @@ var getAll=function(tablename,conditions,req,res,next){
               connection.collection("subjects").find({_id:new mongodb.ObjectId(element.subject_ID)})
               .toArray(function(err,subresult) {
                 if(err) throw err;
-                element["subject"]=subresult[0].subject;
+                if (subresult!=0) {
+                  element["subject"]=subresult[0].subject;
+                  element["count"]=subresult[0].count;
+                }
+                
               });
             }
             connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
