@@ -48,25 +48,24 @@ var getAll=function(tablename,conditions,req,res,next){
         if(err) throw err;
         myresult=result;
         
-    if(tablename=="comments"||tablename=="subjects"){
-      myresult.forEach(element => {
-        connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
-        .toArray(function(err,rslt){
-          if(err) throw err;          
-          element["personnel_name"]=rslt[0].personnel_name;
-          count++;
-          if(count==myresult.length){
-            res.locals.data={data:myresult};
-            next();
-          }
-        });
-      });
-    }
+        if(tablename=="comments"||tablename=="subjects"){
+          myresult.forEach(element => {
+            connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
+            .toArray(function(err,rslt){
+              if(err) throw err;          
+              element["personnel_name"]=rslt[0].personnel_name;
+              count++;
+              if(count==myresult.length){
+                res.locals.data={data:myresult};
+                next();
+              }
+            });
+          });
+        }
     else{
       res.locals.data={data:myresult};
       next();
     }
-    
     });
 }
 var updateData=function(tablename,query,newVal,res,next){

@@ -1,0 +1,35 @@
+
+<style>
+  div.row.box {
+    background-color: rgb(209, 208, 208);
+    border-style: groove;
+  }
+
+  .subjectlist {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    padding-top: 2%;
+  }
+</style>
+    <div class="container">
+      <div>
+        <div class="subjectlist">
+        <div>
+          <h1 style="color: #1c2a48; font-family: serif;">Users</h1>
+        </div>
+        
+        <div ng-repeat="personnel in personnels">
+          <ul>
+            <hr>
+            <div>
+                <a style="font-family: sans-serif; color: black;" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>  
+                <br>         
+            </div>
+          </ul>
+        </div>
+       <hr>
+
+      </div>
+      </div>
+    </div>
