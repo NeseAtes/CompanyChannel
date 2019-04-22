@@ -47,8 +47,8 @@ var getAll=function(tablename,conditions,req,res,next){
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
         if(err) throw err;
         myresult=result;
-        
-        if(tablename=="comments"||tablename=="subjects"){
+        if((tablename=="comments"||tablename=="subjects")&&result.length!=0){
+          console.log(result)
           myresult.forEach(element => {
             connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
             .toArray(function(err,rslt){
