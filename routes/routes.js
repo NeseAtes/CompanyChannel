@@ -20,6 +20,7 @@ module.exports = function(app) {
 	app.get('/api/subject/tag',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubjectsforTag,BaseController.EndSession);
 	app.delete('/api/subject/:subject_ID',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
 	app.get('/api/subject/personnel',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.getPersonnelSubjects, BaseController.EndSession);
+	app.post('/api/subject/solved',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.solved,BaseController.EndSession);
 
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
 	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
