@@ -72,10 +72,11 @@ var getSubject = function (req, res, next) {
 var getPersonnelSubjects=function(req,res,next){
 	var condition = {
 		company_ID: res.locals.data.data.company_id,
-		personnel_ID:res.locals.data.data.personnel_id
+		personnel_ID:req.query.personnel_ID
 	}
 	mainCtrl.getAll("subjects", condition, req, res, next);
 }
+
 var getOneSubject = function (req, res, next) {
 	var company_id = res.locals.data.data.company_id;
 	var condition = {
