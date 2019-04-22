@@ -14,6 +14,8 @@ var getComment = function(req,res,next){
 	var condition={
 		subject_ID:req.query.subject_ID
 	}
+	if(req.query.personnel_ID!=undefined)
+		condition["personnel_ID"]=req.query.personnel_ID;
 	mainCtrl.getAll("comments",condition,req,res,next);
 };
 var updateComment=function(req,res,next){ //sadece yorum yapan düzenleyebilir/silebilir
