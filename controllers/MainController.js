@@ -50,6 +50,13 @@ var getAll=function(tablename,conditions,req,res,next){
         if((tablename=="comments"||tablename=="subjects") && result.length!=0){
           console.log(result)
           myresult.forEach(element => {
+            if(tablename=="comments"){
+              connection.collection("subjects").find({_id:new mongodb.ObjectId(element.subject_ID)})
+              .toArray(function(err,subresult) {
+                if(err) throw err;
+                element["subject"]=subresult[0].subject;
+              });
+            }
             connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
             .toArray(function(err,rslt){
               if(err) throw err;          

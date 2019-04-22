@@ -17,9 +17,7 @@ var getComment = function(req,res,next){
 	mainCtrl.getAll("comments",condition,req,res,next);
 };
 var getPersonnelComments=function(req,res,next) {
-	var condition={};
-	if(req.query.personnel_ID!=undefined)
-		condition["personnel_ID"]=req.query.personnel_ID;
+	var condition={personnel_ID:req.query.personnel_ID};
 	mainCtrl.getAll("comments",condition,req,res,next);
 }
 var updateComment=function(req,res,next){ //sadece yorum yapan düzenleyebilir/silebilir
