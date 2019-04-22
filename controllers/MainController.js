@@ -47,46 +47,27 @@ var getAll=function(tablename,conditions,req,res,next){
     var count=0;
     console.log(conditions)
     connection.collection(tablename).find(conditions).toArray(function(err,result) {
-<<<<<<< HEAD
-      if(err) throw err;
-      myresult=result;
-      if(tablename=="comments"||tablename=="subjects"){
-        myresult.forEach(element => {
-          connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
-          .toArray(function(err,rslt){
-            if(err) throw err;          
-            element["personnel_name"]=rslt[0].personnel_name;
-            count++;
-            if(count==myresult.length){
-              res.locals.data={data:myresult};
-              next();
-            }
-          });
-        });
-      }
-    res.locals.data={
-      data: result
-    }
-    next();
-=======
         if(err) throw err;
         myresult=result;
         
-    if(tablename=="comments"||tablename=="subjects"){
-      myresult.forEach(element => {
-        connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
-        .toArray(function(err,rslt){
-          if(err) throw err;          
-          element["personnel_name"]=rslt[0].personnel_name;
-          count++;
-          if(count==myresult.length){
-            res.locals.data={data:myresult};
-            next();
-          }
-        });
-      });
+        if(tablename=="comments"||tablename=="subjects"){
+          myresult.forEach(element => {
+            connection.collection("personnels").find({_id:new mongodb.ObjectId(element.personnel_ID)})
+            .toArray(function(err,rslt){
+              if(err) throw err;          
+              element["personnel_name"]=rslt[0].personnel_name;
+              count++;
+              if(count==myresult.length){
+                res.locals.data={data:myresult};
+                next();
+              }
+            });
+          });
+        }
+    else{
+      res.locals.data={data:myresult};
+      next();
     }
->>>>>>> 69b2f0c46206b3e5b30eaa26966d625c4910a3b8
     });
 }
 var updateData=function(tablename,query,newVal,res,next){
