@@ -43,6 +43,7 @@ module.exports = function(app) {
 
 	app.post('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.addTag,BaseController.EndSession);
 	app.get('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.getAllTag,BaseController.EndSession);
+	app.post('/api/tags/delete',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.deleteTag,BaseController.EndSession);
 
 	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };
