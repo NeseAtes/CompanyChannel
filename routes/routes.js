@@ -30,9 +30,11 @@ module.exports = function(app) {
 
 	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
 	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
+	app.delete('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.deleteCompany,BaseController.EndSession);
 
 	app.get('/api/personnels',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.getPersonnels,BaseController.EndSession);
 	app.post('/api/personnels',TokenCtrl.adminControl,BaseController.InitSession,PersonnelsCtrl.addPersonnel,BaseController.EndSession);
+	app.post('/api/personnels/password',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.updatePassword,BaseController.EndSession);
 
 	app.post('/api/createIndex',BaseController.InitSession,ElasticSearchCtrl.createIndex,BaseController.EndSession);
 
@@ -41,6 +43,7 @@ module.exports = function(app) {
 
 	app.post('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.addTag,BaseController.EndSession);
 	app.get('/api/tags',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.getAllTag,BaseController.EndSession);
+	app.post('/api/tags/delete',TokenCtrl.tokenControl,BaseController.InitSession,TagCtrl.deleteTag,BaseController.EndSession);
 
 	app.get('/logout',TokenCtrl.tokenControl,BaseController.InitSession,PersonnelsCtrl.logout,BaseController.EndSession);
 };

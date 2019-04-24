@@ -30,6 +30,21 @@ var isExist_tag=function(subject,tag,res,next) {
         }
     });
 }
+var deleteTag=function(tags,res) {
+    var connection=res.locals.database;
+    tags.forEach(element => {
+        var condition={tag:element};
+        connection.collection("tags").findOne(condition,function(err,result) {
+            if(result.count==1){
+                connection.collection("tags").deleteOne(condition);
+            }else{
+                result["count"]=result.count-1;
+                connection.collection("tags").update(condition,result);
+            }
+        });
+    });
+}
 module.exports.addTag=addTag;
 module.exports.getAllTag=getAllTag;
 module.exports.isExist_tag=isExist_tag;
+module.exports.deleteTag=deleteTag;
