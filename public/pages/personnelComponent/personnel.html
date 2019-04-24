@@ -12,12 +12,12 @@
   }
 </style>
 
-<div class="container-fluid">
+<div ng-show="users()" class="container-fluid">
   <div>
   <h1>Users</h1>
 </div>
   <div class="row">
-    <div class="col-lg-4" ng-repeat="personnel in personnels" style="width: 290px;" >
+    <div class="col-lg-4" ng-repeat="personnel in personnels">
      
       <a style="font-family: sans-serif; color: black;" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>  
                   

@@ -44,11 +44,12 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
             if(resp.data.message=='session closed'){
                 setTimeout(function(){
                     $window.location.reload();
-                    $localStorage.is_admin=true;
-                    $localStorage.is_user=true;
                 });
                 $localStorage.$reset();
                 $location.path("/");
+                $localStorage.is_admin=false;
+                $localStorage.is_user=false;
+
 
             }
         });

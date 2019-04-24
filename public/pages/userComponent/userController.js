@@ -1,3 +1,10 @@
+app.config(function($routeProvider,$locationProvider){
+    $locationProvider.hashPrefix('');
+    $routeProvider.when('/subject/:subjectid', {
+      templateUrl: './pages/subjectComponent/subject.html',
+      controller: 'subjectController'
+    });
+});
 
 app.controller('userController',function($scope,$http,$routeParams) {
 	$scope.tab = 1;

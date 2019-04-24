@@ -40,7 +40,7 @@ var updateComment=function(req,res,next){ //sadece yorum yapan düzenleyebilir/s
 }
 var deleteComment=function(req,res,next) {
 	var condition={
-		_id:new mongodb.ObjectId(req.body.comment_ID)
+		_id:new mongodb.ObjectId(req.query.comment_ID)
 	}
 	var connection=res.locals.database;
 	connection.collection("comments").findOne(condition,function(err,result){

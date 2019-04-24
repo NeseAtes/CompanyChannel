@@ -1,4 +1,4 @@
-var app = angular.module('myApp',['ngRoute', 'ngCookies', 'ngStorage','ui.bootstrap']);
+var app = angular.module('myApp',['ngRoute', 'ngCookies', 'ngStorage','ui.bootstrap','xeditable']);
 
 angular.forEach(config,function(key,value) {
   app.constant(value,key);

@@ -20,4 +20,29 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams)
                 $window.location.reload();
         });
     }
+
+
+    $scope.deleteData=function(comid){
+        $http.delete("http://localhost:3000/api/comment?comment_ID="+comid).then(function(response){
+            console.log("commentresponse",response)
+            $window.alert("Silindi");
+            setTimeout(function(){
+                $window.location.reload();
+            });
+           
+        })
+    }
+
+    $scope.updateData=function(comid,comcomment){
+        console.log("$scope.namecom",comcomment);
+        console.log("comid",comid);
+        var data={
+            new_comment:comcomment,
+            comment_ID:comid
+        }
+
+        $http.post("http://localhost:3000/api/comment/update?comment_ID=",JSON.stringify(data)).then(function(response){
+            console.log("updateComment", response);
+        })
+    }
 });
