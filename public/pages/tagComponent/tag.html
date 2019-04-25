@@ -33,7 +33,9 @@
               <small style="float: right; font-family: monospace;">{{sub.date}}</small>              
               
               <span class="badge badge-danger badge-pill">{{sub.count}} view</span> 
-              <a style="background-color: #5e92f3;" class="renk" href="#/tag/{{sub.tags[0]}}">{{sub.tags[0]}}</a>  
+              <span ng-repeat="tag in sub.tags">
+                <a style="background-color: #5e92f3;" class="renk badge" href="#/tag/{{tag}}">{{tag}}</a>  
+              </span>
           </div>
         </ul>
       </div>

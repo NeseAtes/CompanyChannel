@@ -13,6 +13,7 @@
 	textarea {
 		width: 50%;
 	}
+
 </style>
 <div class="container">
 	<li ng-repeat="sub in subject" class="box">
@@ -29,43 +30,30 @@
 	<br>
 	<hr>
 	<div ng-repeat="com in comments" class="row">
+
 		<li class="list-group-item list-group-item">
 			<!--pre style="font-family: serif; font-size: 18px" editable-text="username">{{com.comment}}</pre-->
 			<!--pre style="font-family: serif; font-size: 18px" >{{ user.name || 'empty' }}</pre-->
 
-<form editable-form name="editableForm" onaftersave="saveUser()">
-	<div>
-      <!-- editable username (text with validation) -->
-      <span editable-text="com.comment" ng-model="namecom" e-name="name" onbeforesave="checkName($data)" e-required>{{com.comment}}</span>
-    </div>
-
-
-	<div class="buttons">
-      <!-- button to show form -->
-      <button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-        Edit
-      </button>
-      <!-- buttons to submit / cancel form -->
-      <span ng-show="editableForm.$visible">
-        <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-          Save
-        </button>
-       
-        <button type="button" class="btn btn-danger" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-          Cancel
-        </button>
-        
-		<a style="color: #1c2a48;" class="btn btn-sm btn-light" ng-click="deleteData(com._id)"><i class="fas fa-trash-alt"></i></a>
-      </span>
-    </div>
-</form> 
-
-			<br>
-
-<a style="color: #1c2a48;" class="btn btn-sm btn-light" ng-click="updateData(com._id,com.comment)" ><i class="fas fa-edit"></i></a>
-			
-
-
+			<form editable-form name="editableForm" onaftersave="saveUser()" style="padding-bottom: 0px;">
+					<pre editable-textarea="com.comment"  e-name="name" onbeforesave="checkName($data)" onaftersave="updateData(com._id,com.comment)" e-required>
+						<pre>{{com.comment}}</pre></pre>
+			    
+			      <div class="row d-flex align-items-end flex-column">
+			      	 <!-- button to show form -->
+			      <button type="button" style="font-weight: bold;" class="btn btn-light" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+			        Edit
+			      </button>
+			      <!-- buttons to submit / cancel form -->
+			      <span ng-show="editableForm.$visible">
+			        <button type="submit" class="btn btn-sm btn-light fas fa-edit" ng-disabled="editableForm.$waiting"></button> 
+			        <a style="color: #1c2a48;" class="btn btn-sm btn-light fas fa-trash-alt " ng-click="deleteData(com._id)"></a>
+			        <button type="button" class="btn btn-sm btn-light fas fa-window-close" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+			        </button>
+			        <!--a style="color: #1c2a48;" class="btn btn-sm btn-light" ng-click="updateData(com._id,com.comment)">Update</a-->
+			      </span>
+			      </div>  
+			</form>
 			<small style="float: right; font-family: sans-serif;">{{com.personnel_name}}</small>
 			<br>
 			<small style="float: right; font-family: monospace;">{{com.date}}</small>

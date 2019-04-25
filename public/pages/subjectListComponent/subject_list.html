@@ -10,6 +10,9 @@
     width: 50%;
     padding-top: 2%;
   }
+  .renk:hover{
+    color: black;
+  }
 </style>
     <div ng-show="users()" class="container">
       <div>
@@ -27,12 +30,15 @@
                 <a style="color: black; font-family: cursive; " href="#/subject/{{sub._id}}">{{sub.subject}}</a>
                 <br>
                 <small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>  
-                <br>
-
-                <small style="float: right; font-family: monospace;">{{sub.date}}</small>              
+                <br>             
                 
-                <span class="badge badge-danger badge-pill">{{sub.count}} view</span> 
-                <a style="background-color: #AED6F1;" href="#/tag/{{sub.tags[0]}}">{{sub.tags[0]}}</a>  
+                <span class="badge badge-danger badge-pill">{{sub.count}} view</span>
+                <br> 
+                <small style="float: right; font-family: monospace;">{{sub.date}}</small> 
+                
+                <span ng-repeat="tag in sub.tags">
+                   <a style="background-color: #5e92f3;" class="renk badge" href="#/tag/{{tag}}">{{tag}}</a>  
+                </span>
             </div>
           </ul>
         </div>
