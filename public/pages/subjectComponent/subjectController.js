@@ -7,13 +7,22 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
             return $scope.is_id
         }
     }
-
+    $scope.checkdene=function(checkperid){
+        $scope.is_id=localStorage.getItem('is_id');
+        console.log("kontrol",$scope.is_id );
+        console.log("kontrol2",checkperid );
+        if ($scope.is_id==checkperid) {
+            return $scope.is_id
+        }
+    }
 
     $scope.sub_id=$routeParams.subjectid;
     console.log("subjectid",$routeParams.subjectid);
     $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
-        console.log("response",response);
+        console.log("AAAAAAAresponse",response);
         $scope.subject=response.data.data;
+        $scope.checkPer=response.data.data[0].personnel_ID;
+        //console.log("$scope.checkPer",$scope.checkPer);
     });
     $http.get("http://localhost:3000/api/comment?subject_ID="+$scope.sub_id).then(function(response) {
     	console.log("comResponse",response);
@@ -53,6 +62,15 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
 
         $http.post("http://localhost:3000/api/comment/update?comment_ID=",JSON.stringify(data)).then(function(response){
             console.log("updateComment", response);
+        })
+    }
+
+    $scope.checkshow=function(checkid){
+        $http.post("http://localhost:3000/api/comment/answer",{comment_ID:checkid}).then(function(response){
+            console.log("checkResponse",response);
+            setTimeout(function(){
+                    $window.location.reload();
+            });
         })
     }
 });
