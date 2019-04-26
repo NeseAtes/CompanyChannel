@@ -23,8 +23,8 @@ var answer = function (req, res, next) {
 		connection.collection("subjects").findOne(subject_id, function (err1, rslt) {
 			if (err1) throw err1;
 			if (present_personnel == rslt.personnel_ID) {
-				rslt.isOk = true;
-				result.is_answer = true;
+				rslt.isOk = rslt.isOk==true?false:true;
+				result.is_answer =result.is_answer==true?false:true;
 
 				connection.collection("subjects").update(subject_id, rslt);
 				connection.collection("comments").update(condition, result);
