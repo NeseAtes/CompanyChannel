@@ -20,13 +20,14 @@ module.exports = function(app) {
 	app.get('/api/subject/tag',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.getSubjectsforTag,BaseController.EndSession);
 	app.delete('/api/subject/:subject_ID',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
 	app.get('/api/subject/personnel',TokenCtrl.tokenControl, BaseController.InitSession, SubjectController.getPersonnelSubjects, BaseController.EndSession);
-	app.post('/api/subject/solved',TokenCtrl.tokenControl,BaseController.InitSession,SubjectController.solved,BaseController.EndSession);
 
 	app.post('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.addComment,BaseController.EndSession);
 	app.get('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getComment,BaseController.EndSession);
 	app.get('/api/comment/personnel',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.getPersonnelComments,BaseController.EndSession);
 	app.post('/api/comment/update',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.updateComment,BaseController.EndSession);
 	app.delete('/api/comment',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.deleteComment,BaseController.EndSession);
+	app.post('/api/comment/answer',TokenCtrl.tokenControl,BaseController.InitSession,CommentController.answer,BaseController.EndSession);
+
 
 	app.get('/api/companies',TokenCtrl.tokenControl,BaseController.InitSession,CompaniesCtrl.getCompanies,BaseController.EndSession);
 	app.post('/api/companies',BaseController.InitSession,CompaniesCtrl.addCompany,BaseController.EndSession);
