@@ -17,10 +17,12 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
         var password=$scope.password;
         $http.post("http://localhost:3000/login",{email:email,password:password})
         .then(function(response){
+            //console.log("dene",response);
             setTimeout(function(){
                 $window.location.reload();
             });
             if(response.data.is_user==true){
+                localStorage.setItem('is_id',response.data.is_id);
                 $localStorage.is_user=true;
                 $location.path("/");
 
@@ -45,13 +47,10 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                 setTimeout(function(){
                     $window.location.reload();
                 });
-                $localStorage.$reset();
+                //$localStorage.$reset();
+                $window.localStorage.clear();
                 $location.path("/");
-                $localStorage.is_admin=false;
-                $localStorage.is_user=false;
-
-
-            }
+                            }
         });
     }
     $scope.showBtn();

@@ -17,6 +17,7 @@ app.config(function($routeProvider,$locationProvider){
 app.controller('subject_listController', function($scope, $http, $localStorage) {
     $scope.users=function(){
       $scope.is_user= $localStorage.is_user;
+      //console.log("bb",$scope.is_user)
       return $scope.is_user;
     }
 

@@ -73,10 +73,12 @@ var login = function (req, res, next) {
                     res.cookie('auth', token);
                     res.locals.data = {
                         data: token,
+                        is_id:result._id,
                         is_admin: result.role == "admin" ? true : false,
                         is_user: true
                     };
                     next();
+                    console.log("is_id",res.locals.data.is_id)
                 }
                 else {
                     return res.send({ is_user: false, message: 'Please check the information' });

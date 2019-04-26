@@ -1,4 +1,14 @@
-app.controller('subjectController', function($scope,$window, $http,$routeParams) {
+app.controller('subjectController', function($scope,$window, $http,$routeParams,$localStorage) {
+    $scope.deneme=function(perid){
+        $scope.is_id=localStorage.getItem('is_id');
+        //console.log("($scope.is_id",$scope.is_id);
+        //console.log("perid",perid);
+        if ($scope.is_id==perid) {
+            return $scope.is_id
+        }
+    }
+
+
     $scope.sub_id=$routeParams.subjectid;
     console.log("subjectid",$routeParams.subjectid);
     $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
@@ -34,8 +44,8 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams)
     }
 
     $scope.updateData=function(comid,comcomment){
-        console.log("$scope.namecom",comcomment);
-        console.log("comid",comid);
+        //console.log("$scope.namecom",comcomment);
+        //console.log("comid",comid);
         var data={
             new_comment:comcomment,
             comment_ID:comid
