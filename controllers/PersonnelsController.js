@@ -78,7 +78,6 @@ var login = function (req, res, next) {
                         is_user: true
                     };
                     next();
-                    console.log("is_id",res.locals.data.is_id)
                 }
                 else {
                     return res.send({ is_user: false, message: 'Please check the information' });
