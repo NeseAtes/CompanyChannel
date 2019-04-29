@@ -48,9 +48,11 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                     $window.location.reload();
                 });
                 //$localStorage.$reset();
-                $window.localStorage.clear();
+                $window.onbeforeunload = function() {
+                    localStorage.clear();
+                }
                 $location.path("/");
-                            }
+            }
         });
     }
     $scope.showBtn();
