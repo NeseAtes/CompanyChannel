@@ -50,7 +50,8 @@ var addingOperations = function (tablename, result, req, res, next) {
       role: "admin",
       email: company_name + "@" + company_name + ".com",
       personnel_name: company_name,
-      company_ID: result.insertedId.toString()
+      company_ID: result.insertedId.toString(),
+      picture_path:"public\\uploads\\user.png"
     }
     bcrypt.hash(company_name, 10, function (err, hash) {
       if (err) throw err;

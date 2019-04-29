@@ -8,21 +8,21 @@ var ElasticSearchCtrl = require("../controllers/ElasticSearchController");
 var HomeCtrl = require("../controllers/HomeController");
 var TokenCtrl = require("../controllers/TokenController");
 var TagCtrl = require("../controllers/TagController");
-var FileCtrl = require("../controllers/FileController");
 
-var multer  = require('multer')
+var multer = require('multer')
 var upload = multer({ dest: 'public/uploads/' })
 // SET STORAGE
 var storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-	  cb(null, 'public/uploads/')
+		cb(null, 'public/uploads/')
 	},
 	filename: function (req, file, cb) {
-	  cb(null,  '-' + Date.now())
+		var now = Date.now();
+		cb(null, '-' + now)
 	}
-  })
-   
-  var upload = multer({ storage: storage })
+})
+
+var upload = multer({ storage: storage })
 
 module.exports = function (app) {
 	app.use(cookieParser())
@@ -51,7 +51,7 @@ module.exports = function (app) {
 	app.get('/api/personnels', TokenCtrl.normalControl, BaseController.InitSession, PersonnelsCtrl.getPersonnels, BaseController.EndSession);
 	app.post('/api/personnels', TokenCtrl.adminControl, BaseController.InitSession, PersonnelsCtrl.addPersonnel, BaseController.EndSession);
 	app.post('/api/personnels/password', TokenCtrl.normalControl, BaseController.InitSession, PersonnelsCtrl.updatePassword, BaseController.EndSession);
-	app.post('/api/personnels/picture', TokenCtrl.normalControl, BaseController.InitSession, upload.single('file'),FileCtrl.fileUpload, BaseController.EndSession);
+	app.post('/api/personnels/picture', TokenCtrl.normalControl, BaseController.InitSession, upload.single('file'), PersonnelsCtrl.uploadPicture, BaseController.EndSession);
 
 	app.post('/api/createIndex', BaseController.InitSession, ElasticSearchCtrl.createIndex, BaseController.EndSession);
 
