@@ -8,21 +8,11 @@ var ElasticSearchCtrl = require("../controllers/ElasticSearchController");
 var HomeCtrl = require("../controllers/HomeController");
 var TokenCtrl = require("../controllers/TokenController");
 var TagCtrl = require("../controllers/TagController");
+var storages=require("../routes/storages");
 
 var multer = require('multer')
-var upload = multer({ dest: 'public/uploads/' })
-// SET STORAGE
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'public/uploads/')
-	},
-	filename: function (req, file, cb) {
-		var now = Date.now();
-		cb(null, '-' + now)
-	}
-})
-
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storages.storage })
+var comment_upload=multer({storage:storages.comment_storage})
 
 module.exports = function (app) {
 	app.use(cookieParser())
@@ -42,6 +32,7 @@ module.exports = function (app) {
 	app.post('/api/comment/update', TokenCtrl.normalControl, BaseController.InitSession, CommentController.updateComment, BaseController.EndSession);
 	app.delete('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.deleteComment, BaseController.EndSession);
 	app.post('/api/comment/answer', TokenCtrl.normalControl, BaseController.InitSession, CommentController.answer, BaseController.EndSession);
+	app.post('/api/comment/picture', TokenCtrl.normalControl, BaseController.InitSession, comment_upload.single('comment_file'),CommentController.uploadCommentPicture, BaseController.EndSession);
 
 
 	app.get('/api/companies', TokenCtrl.normalControl, BaseController.InitSession, CompaniesCtrl.getCompanies, BaseController.EndSession);
