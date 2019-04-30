@@ -47,10 +47,10 @@ app.controller('loginController', function($scope, $http, $cookies,$location, $w
                 setTimeout(function(){
                     $window.location.reload();
                 });
-                //$localStorage.$reset();
-                $window.onbeforeunload = function() {
+                $localStorage.$reset();
+                /*$window.onbeforeunload = function() {
                     localStorage.clear();
-                }
+                }*/
                 $location.path("/");
             }
         });

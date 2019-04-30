@@ -1,7 +1,7 @@
 app.controller('registerController', function ($scope, $http, $location, $window, SERVICE_URL) {
     $scope.register = function (isValid) {
         var data = {
-            name:$scope.name,
+            personnel_name:$scope.name,
             email:$scope.email,
             password:$scope.password,
             role:$scope.role

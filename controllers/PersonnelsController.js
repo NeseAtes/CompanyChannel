@@ -8,6 +8,7 @@ var addPersonnel = function (req, res, next) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         if(err) throw err;
         req.body.password = hash;
+        req.body.picture_path="public\\uploads\\user.png"
         var connection = res.locals.database;
         var conditions = {
             email: req.body.email,
@@ -57,6 +58,23 @@ var updatePassword = function (req, res, next) {
         next();
     }
 }
+var uploadPicture=function(req,res,next){
+    var personnel_ID={_id:new mongodb.ObjectId(req.body.personnel_ID)};
+    var path=req.file.path;
+    var connection = res.locals.database;
+    connection.collection("personnels").findOne(personnel_ID,function(err,result) {
+        if(err) throw err;
+        else if(result!=null){
+            result.picture_path=path;
+            connection.collection("personnels").update(personnel_ID,result);
+            res.locals.data={data:true};
+            next();
+        }else{
+            res.locals.data={data:false};
+            next();
+        }
+    });
+}
 var login = function (req, res, next) {
     var connection = res.locals.database;
     connection.collection("personnels").findOne({ email: req.body.email }, function (err, result) {
@@ -101,3 +119,4 @@ module.exports.getPersonnels = getPersonnels;
 module.exports.login = login;
 module.exports.logout = logout;
 module.exports.updatePassword = updatePassword;
+module.exports.uploadPicture=uploadPicture;
