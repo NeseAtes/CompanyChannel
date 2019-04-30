@@ -8,7 +8,7 @@ var addPersonnel = function (req, res, next) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         if(err) throw err;
         req.body.password = hash;
-        req.body.picture_path="public\\uploads\\user.png"
+        req.body.picture_path="uploads\\user.png"
         var connection = res.locals.database;
         var conditions = {
             email: req.body.email,
@@ -60,7 +60,7 @@ var updatePassword = function (req, res, next) {
 }
 var uploadPicture=function(req,res,next){
     var personnel_ID={_id:new mongodb.ObjectId(req.body.personnel_ID)};
-    var path=req.file.path;
+    var path=req.file.path.replace('public\\','');
     var connection = res.locals.database;
     connection.collection("personnels").findOne(personnel_ID,function(err,result) {
         if(err) throw err;
