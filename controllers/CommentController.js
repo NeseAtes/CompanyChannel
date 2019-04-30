@@ -1,4 +1,5 @@
 var mainCtrl = require('./MainController');
+var fileCtrl = require('./FileController');
 var moment = require('moment');
 var mongodb = require('mongodb');
 
@@ -51,21 +52,8 @@ var answer = function (req, res, next) {
 	});
 }
 var uploadCommentPicture=function(req,res,next){
-	var comment_ID={_id:new mongodb.ObjectId(req.body.comment_ID)};
-    var path=req.file.path.replace('public\\','');
-    var connection = res.locals.database;
-    connection.collection("comments").findOne(comment_ID,function(err,result) {
-        if(err) throw err;
-        else if(result!=null){
-            result.picture_paths.push(path);
-            connection.collection("comments").update(comment_ID,result);
-            res.locals.data={data:true};
-            next();
-        }else{
-            res.locals.data={data:false};
-            next();
-        }
-    });
+	req.body["id"]=req.body.comment_ID;
+	fileCtrl.uploadFile(req,res,next,"comments");
 };
 var getComment = function (req, res, next) {
 	var condition = {
@@ -102,7 +90,9 @@ var deleteComment = function (req, res, next) {
 	var connection = res.locals.database;
 	connection.collection("comments").findOne(condition, function (err, result) {
 		if (result.personnel_ID == res.locals.data.data.personnel_id) {
+			fileCtrl.deleteFile("comments",condition,res);
 			mainCtrl.deleteData("comments", condition, req, res, next);
+			next();
 		}
 		else {
 			res.locals.data = {

@@ -2,6 +2,7 @@ var mainCtrl = require('./MainController');
 var mongodb = require('mongodb');
 var moment = require('moment');
 var tagCtrl = require("./TagController");
+var fileCtrl = require('./FileController');
 
 var parseForTag = function (companyid, description) {
 	var arr = description.split(" #");
@@ -26,6 +27,7 @@ var addSubject = function (req, res, next) {//req.tag json gönder
 	req.body["isOk"] = false;
 	req.body["count"] = 0;
 	req.body["tags"] = [];
+	req.body["picture_paths"]=[];
 
 	req.tag = parseForTag(companyid, req.body.description);
 
@@ -82,6 +84,10 @@ var getSubjectsforTag = function (req, res, next) {
 	}
 	mainCtrl.getAll("subjects", condition, req, res, next);
 }
+var uploadSubjectPicture = function (req, res, next) {
+	req.body["id"] = req.body.subject_ID;
+	fileCtrl.uploadFile(req, res, next, "subjects");
+}
 
 var deleteSubject = function (req, res, next) {
 	var id = { _id: new mongodb.ObjectId(req.params.subject_ID) };
@@ -94,7 +100,7 @@ var deleteSubject = function (req, res, next) {
 			tagCtrl.deleteTag(tags, res);
 		}
 	});
-
+	fileCtrl.deleteFile("subjects",id,res);
 	mainCtrl.deleteData("subjects", id, req, res, next);
 	connection.collection("comments").deleteMany({ subject_ID: req.params.subject_ID });
 }
@@ -105,3 +111,4 @@ module.exports.getOneSubject = getOneSubject;
 module.exports.deleteSubject = deleteSubject;
 module.exports.getPersonnelSubjects = getPersonnelSubjects;
 module.exports.getSubjectsforTag = getSubjectsforTag;
+module.exports.uploadSubjectPicture = uploadSubjectPicture;
