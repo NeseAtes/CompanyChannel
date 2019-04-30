@@ -8,6 +8,7 @@ var addComment = function (req, res, next) {
 	req.body["company_ID"] = res.locals.data.data.company_id;
 	req.body["personnel_ID"] = res.locals.data.data.personnel_id;
 	req.body["is_answer"] = false;
+	req.body["picture_paths"]=[];
 	mainCtrl.addData("comments", req, res, next);
 };
 var answer = function (req, res, next) {
@@ -49,6 +50,23 @@ var answer = function (req, res, next) {
 		});
 	});
 }
+var uploadCommentPicture=function(req,res,next){
+	var comment_ID={_id:new mongodb.ObjectId(req.body.comment_ID)};
+    var path=req.file.path.replace('public\\','');
+    var connection = res.locals.database;
+    connection.collection("comments").findOne(comment_ID,function(err,result) {
+        if(err) throw err;
+        else if(result!=null){
+            result.picture_paths.push(path);
+            connection.collection("comments").update(comment_ID,result);
+            res.locals.data={data:true};
+            next();
+        }else{
+            res.locals.data={data:false};
+            next();
+        }
+    });
+};
 var getComment = function (req, res, next) {
 	var condition = {
 		subject_ID: req.query.subject_ID
@@ -100,3 +118,4 @@ module.exports.updateComment = updateComment;
 module.exports.deleteComment = deleteComment;
 module.exports.getPersonnelComments = getPersonnelComments;
 module.exports.answer = answer;
+module.exports.uploadCommentPicture = uploadCommentPicture;
