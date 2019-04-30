@@ -6,7 +6,7 @@ app.config(function($routeProvider,$locationProvider){
     });
 });
 
-app.controller('userController',function($scope,$http,$routeParams,Upload,$timeout) {
+app.controller('userController',function($scope,$http,$routeParams,$timeout,$window) {
 	$scope.tab = 1;
 
     $scope.setTab = function(newTab){
@@ -23,7 +23,7 @@ app.controller('userController',function($scope,$http,$routeParams,Upload,$timeo
 	$http.get("http://localhost:3000/api/personnels?personnel_ID="+$scope.personnel_id)
     .then(function(response) {
       console.log("response3",response.data.data);
-      $scope.users=response.data.data
+      $scope.users=response.data.data[0];
     });
 
     console.log($scope.personnel_id)
@@ -38,6 +38,17 @@ app.controller('userController',function($scope,$http,$routeParams,Upload,$timeo
       console.log("response5",response);
       $scope.comSub=response.data.data
     });
+
+
+    $scope.imagePer=function(imgId){
+      $scope.is_id=localStorage.getItem('is_id');
+      console.log("kontrol3",$scope.is_id );
+      console.log("kontrol4",imgId );
+      if ($scope.is_id==imgId) {
+          return $scope.is_id
+      }
+    }
+
 
   $scope.uploadFile = function(){
       console.log("girdi")
@@ -55,6 +66,9 @@ app.controller('userController',function($scope,$http,$routeParams,Upload,$timeo
             headers: {'Content-Type': undefined}
         }).then(function(response){
           console.log("responseİmage",response);
+          setTimeout(function(){
+              $window.location.reload();
+          });
         })
     };
 

@@ -1,5 +1,5 @@
 app.controller('subjectController', function($scope,$window, $http,$routeParams,$localStorage) {
-    $scope.deneme=function(perid){
+    $scope.editPer=function(perid){
         $scope.is_id=localStorage.getItem('is_id');
         //console.log("($scope.is_id",$scope.is_id);
         //console.log("perid",perid);

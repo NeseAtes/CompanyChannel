@@ -22,20 +22,22 @@
 </style>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-6 d-flex align-items-end flex-column">
-			<input type="file" file-model="myFile"/><br><br>
-			<button ng-click="uploadFile()">Upload</button>
+		<div class="col-lg-6 d-flex align-items-center flex-column">
+		
+				<img ng-src="{{users.picture_path}}" width="80%" height="40%">
 
 		</div>
 		<div class="col-lg-6">
-			<li ng-repeat="user in users" class="box">
-				<h1 style="color: black; font-family: cursive;">{{user.personnel_name}}</h1>
+			<li class="box" >
+				<h1 style="color: black; font-family: cursive;">{{users.personnel_name}}</h1>
 				<br>
 				<div>
-					<pre style="font-family: sans-serif; font-size: 20px">{{user.email}}</pre>
+					<pre style="font-family: sans-serif; font-size: 20px">{{users.email}}</pre>
 				</div>
-				<img src="{{user.picture_path}}">
-
+				<li ng-show="imagePer(users._id)">
+					<input type="file" file-model="myFile"/><br><br>
+					<button ng-click="uploadFile()">Upload</button>
+				</li>
 			</li>
 			<br>
 			<hr>
@@ -73,7 +75,7 @@
 				  		<a style="padding-left: 8%; color: black;" href="#/subject/{{com.subject_ID}}">{{com.subject}}</a>
 				  		<small style="font-family: monospace; float: right;">{{com.date}}</small>
 			  		</li>
-			  		
+			  		<hr>
 			  	</div>
 			</div>
 		</div>
