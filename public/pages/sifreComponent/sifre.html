@@ -1,0 +1,29 @@
+<style>
+	.container {
+		position: absolute;
+		left: 25%;
+		width: 50%;
+		padding-top: 2%;
+	}
+
+	li {
+		list-style-type: none;
+		width: 100%;
+	}
+</style>
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<form>
+				<label>Şifreniz:</label>
+				<input type="text" name="eski" ng-model="eskisifre">
+				<br>
+				<label>Yeni Şifreniz:</label>
+				<input type="text" name="yeni" ng-model=yenisifre>
+				<button ng-click="kaydet()">Kaydet</button>
+			</form>
+			
+		</div>
+	</div>
+</div>
