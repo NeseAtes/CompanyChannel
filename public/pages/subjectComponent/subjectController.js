@@ -92,9 +92,25 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
             headers: {'Content-Type': undefined}
         }).then(function(response){
           console.log("responseİmage",response);
-        
+           setTimeout(function(){
+                    $window.location.reload();
+            });
         })
     };
+
+    $scope.deleteImg=function(commid,comment){
+       console.log("commid",commid);
+       console.log("comment_file",comment);
+        $http.delete("http://localhost:3000/api/comment/picture?comment_ID="+commid+"&path="+comment).then(function(response){
+            console.log("comImgResponse",response);
+            setTimeout(function(){
+                    $window.location.reload();
+            });
+        })
+    }
+
+
+
 });
 
 

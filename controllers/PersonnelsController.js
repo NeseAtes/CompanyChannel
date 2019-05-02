@@ -2,6 +2,7 @@ var mainCtrl = require("./MainController");
 var tokenCtrl = require("./TokenController");
 var bcrypt = require('bcrypt');
 var mongodb = require('mongodb');
+var fs = require('fs');
 
 var addPersonnel = function (req, res, next) {
     req.body["company_ID"] = res.locals.data.data.company_id;
@@ -65,6 +66,9 @@ var uploadPicture=function(req,res,next){
     connection.collection("personnels").findOne(personnel_ID,function(err,result) {
         if(err) throw err;
         else if(result!=null){
+            fs.unlink("public\\" + result.picture_path, (err) => {
+                if(err) throw err;
+            });
             result.picture_path=path;
             connection.collection("personnels").update(personnel_ID,result);
             res.locals.data={data:true};
