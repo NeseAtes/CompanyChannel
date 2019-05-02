@@ -26,12 +26,10 @@ module.exports = function (app) {
 	app.post('/api/companies', CompaniesCtrl.addCompany);
 	app.post('/api/createIndex', ElasticSearchCtrl.createIndex);
 
-	app.all('/api/*', BaseController.EndSession)
 	app.all('/api/*', TokenCtrl.adminControl, BaseController.InitSession)//admin
 
 	app.post('/api/personnels', PersonnelsCtrl.addPersonnel);
 
-	app.all('/api/*', BaseController.EndSession)
 	app.all('/api/*', TokenCtrl.normalControl, BaseController.InitSession)//normal
 
 	app.get('/api/subject', SubjectController.getSubject);

@@ -5,10 +5,10 @@ angular.forEach(config,function(key,value) {
 });
 app.config(function($routeProvider,$locationProvider){
   $locationProvider.hashPrefix('');
-  $routeProvider.when('/', {
+  $routeProvider.when('/subject_list', {
     templateUrl: './pages/subjectListComponent/subject_list.html',
     controller: 'subject_listController'
-  }).when('/login', {
+  }).when('/', {
     templateUrl: './pages/loginComponent/login.html',
     controller: 'loginController'
   }).when('/elastic/:searchid',{
@@ -26,7 +26,7 @@ app.config(function($routeProvider,$locationProvider){
   });
 });
 
-app.controller('appController',function($scope,$localStorage,$window,$location){
+app.controller('appController',function($scope,$localStorage,$window,$location,$http){
 	$scope.elasticsearch =function(){
 	    setTimeout(function(){
 			$window.location.reload();
@@ -38,4 +38,8 @@ app.controller('appController',function($scope,$localStorage,$window,$location){
       $scope.is_admin=$localStorage.is_admin;
       return $scope.is_admin;
     }
+    $http.get("http://localhost:3000/api/personnels?personnel_ID="+localStorage.getItem('is_id'))
+    .then(function(response) {
+      $scope.online_user=response.data.data[0];
+    });
 });
