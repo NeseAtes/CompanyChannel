@@ -18,44 +18,57 @@ var subject_upload = multer({ storage: storages.subject_storage })
 module.exports = function (app) {
 	app.use(cookieParser())
 	app.get('/', HomeCtrl.IndexAction);
-	app.post('/login', BaseController.InitSession, PersonnelsCtrl.login, BaseController.EndSession);
+	app.post('/login', BaseController.InitSession,PersonnelsCtrl.login,BaseController.EndSession);
+	app.get('/logout',BaseController.InitSession, PersonnelsCtrl.logout,BaseController.EndSession);
 
-	app.post('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.addSubject, BaseController.EndSession);
-	app.get('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getSubject, BaseController.EndSession);
-	app.delete('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
-	app.get('/api/subject/one', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getOneSubject, BaseController.EndSession);
-	app.get('/api/subject/tag', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getSubjectsforTag, BaseController.EndSession);
-	app.get('/api/subject/personnel', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getPersonnelSubjects, BaseController.EndSession);
-	app.post('/api/subject/picture', TokenCtrl.normalControl, BaseController.InitSession, subject_upload.single('subject_file'), SubjectController.uploadSubjectPicture, BaseController.EndSession);
-	app.delete('/api/subject/picture', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.deleteOneSubjectPicture, BaseController.EndSession);
+	app.all('/api/*', BaseController.InitSession)//init
 
-	app.post('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.addComment, BaseController.EndSession);
-	app.get('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.getComment, BaseController.EndSession);
-	app.get('/api/comment/personnel', TokenCtrl.normalControl, BaseController.InitSession, CommentController.getPersonnelComments, BaseController.EndSession);
-	app.post('/api/comment/update', TokenCtrl.normalControl, BaseController.InitSession, CommentController.updateComment, BaseController.EndSession);
-	app.delete('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.deleteComment, BaseController.EndSession);
-	app.post('/api/comment/answer', TokenCtrl.normalControl, BaseController.InitSession, CommentController.answer, BaseController.EndSession);
-	app.post('/api/comment/picture', TokenCtrl.normalControl, BaseController.InitSession, comment_upload.single('comment_file'), CommentController.uploadCommentPicture, BaseController.EndSession);
-	app.delete('/api/comment/picture', TokenCtrl.normalControl, BaseController.InitSession,CommentController.deleteOnePicture, BaseController.EndSession);
+	app.post('/api/companies', CompaniesCtrl.addCompany);
+	app.post('/api/createIndex', ElasticSearchCtrl.createIndex);
 
-	app.get('/api/companies', TokenCtrl.normalControl, BaseController.InitSession, CompaniesCtrl.getCompanies, BaseController.EndSession);
-	app.post('/api/companies', BaseController.InitSession, CompaniesCtrl.addCompany, BaseController.EndSession);
-	app.delete('/api/companies', TokenCtrl.normalControl, BaseController.InitSession, CompaniesCtrl.deleteCompany, BaseController.EndSession);
+	app.all('/api/*', BaseController.EndSession)
+	app.all('/api/*', TokenCtrl.adminControl, BaseController.InitSession)//admin
 
-	app.get('/api/personnels', TokenCtrl.normalControl, BaseController.InitSession, PersonnelsCtrl.getPersonnels, BaseController.EndSession);
-	app.post('/api/personnels', TokenCtrl.adminControl, BaseController.InitSession, PersonnelsCtrl.addPersonnel, BaseController.EndSession);
-	app.post('/api/personnels/password', TokenCtrl.normalControl, BaseController.InitSession, PersonnelsCtrl.updatePassword, BaseController.EndSession);
+	app.post('/api/personnels', PersonnelsCtrl.addPersonnel);
 
-	app.post('/api/personnels/picture', TokenCtrl.normalControl, BaseController.InitSession, upload.single('file'), PersonnelsCtrl.uploadPicture, BaseController.EndSession);
+	app.all('/api/*', BaseController.EndSession)
+	app.all('/api/*', TokenCtrl.normalControl, BaseController.InitSession)//normal
 
-	app.post('/api/createIndex', BaseController.InitSession, ElasticSearchCtrl.createIndex, BaseController.EndSession);
+	app.get('/api/subject', SubjectController.getSubject);
+	app.get('/api/subject/one', SubjectController.getOneSubject);
+	app.get('/api/subject/tag', SubjectController.getSubjectsforTag);
+	app.get('/api/subject/personnel', SubjectController.getPersonnelSubjects);
 
-	app.post('/api/elastic', TokenCtrl.normalControl, BaseController.InitSession, ElasticSearchCtrl.search, BaseController.EndSession);
-	app.delete('/api/elastic/:_id', TokenCtrl.normalControl, BaseController.InitSession, ElasticSearchCtrl.deleteDocument, BaseController.EndSession);
+	app.post('/api/subject', SubjectController.addSubject);
+	app.post('/api/subject/picture', subject_upload.single('subject_file'), SubjectController.uploadSubjectPicture);
 
-	app.post('/api/tags', TokenCtrl.normalControl, BaseController.InitSession, TagCtrl.addTag, BaseController.EndSession);
-	app.get('/api/tags', TokenCtrl.normalControl, BaseController.InitSession, TagCtrl.getAllTag, BaseController.EndSession);
-	app.post('/api/tags/delete', TokenCtrl.normalControl, BaseController.InitSession, TagCtrl.deleteTag, BaseController.EndSession);
+	app.delete('/api/subject', SubjectController.deleteSubject);
+	app.delete('/api/subject/picture', SubjectController.deleteOneSubjectPicture);
 
-	app.get('/logout', TokenCtrl.normalControl, BaseController.InitSession, PersonnelsCtrl.logout, BaseController.EndSession);
-};
+	app.get('/api/comment', CommentController.getComment);
+	app.get('/api/comment/personnel', CommentController.getPersonnelComments);
+
+	app.post('/api/comment', CommentController.addComment);
+	app.post('/api/comment/update', CommentController.updateComment);
+	app.post('/api/comment/answer', CommentController.answer);
+	app.post('/api/comment/picture', comment_upload.single('comment_file'), CommentController.uploadCommentPicture);
+
+	app.delete('/api/comment', CommentController.deleteComment);
+	app.delete('/api/comment/picture', CommentController.deleteOnePicture);
+
+	app.get('/api/companies', CompaniesCtrl.getCompanies);
+	app.delete('/api/companies', CompaniesCtrl.deleteCompany);
+
+	app.get('/api/personnels', PersonnelsCtrl.getPersonnels);
+	app.post('/api/personnels/password', PersonnelsCtrl.updatePassword);
+	app.post('/api/personnels/picture', upload.single('file'), PersonnelsCtrl.uploadPicture);
+
+	app.post('/api/elastic', ElasticSearchCtrl.search);
+	app.delete('/api/elastic/:_id', ElasticSearchCtrl.deleteDocument);
+
+	app.get('/api/tags', TagCtrl.getAllTag);
+	app.post('/api/tags', TagCtrl.addTag);
+	app.post('/api/tags/delete', TagCtrl.deleteTag);
+
+	app.all('/api/*', BaseController.EndSession)
+}

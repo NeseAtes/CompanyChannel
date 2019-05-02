@@ -60,7 +60,6 @@ var deleteOnePicture = function (req, res, next) {
 	var condition = {
 		_id: new mongodb.ObjectId(req.query.comment_ID)
 	}
-	console.log("aaaaaaaaaaaaa"+req.query.comment_ID)
 	fileCtrl.deleteOneFile(res, next,"comments", path, condition);
 }
 var getComment = function (req, res, next) {
