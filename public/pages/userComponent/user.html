@@ -24,19 +24,19 @@
 	<div class="row">
 		<div class="col-lg-6 d-flex align-items-center flex-column">
 		
-				<img ng-src="{{users.picture_path}}" width="80%" height="40%">
+				<img ng-src="{{users.picture_path}}" width="60%" height="20%">
 
 		</div>
 		<div class="col-lg-6">
-			<li class="box" >
+			<li class="box">
 				<h1 style="color: black; font-family: cursive;">{{users.personnel_name}}</h1>
 				<br>
-				<div>
-					<pre style="font-family: sans-serif; font-size: 20px">{{users.email}}</pre>
-				</div>
+				<pre style="font-family: sans-serif; font-size: 20px">{{users.email}}</pre>
+				<br>
 				<li ng-show="imagePer(users._id)">
 					<input type="file" file-model="myFile"/><br><br>
-					<button ng-click="uploadFile()">Upload</button>
+					<button ng-click="uploadFile()">Upload</button><br><br>
+					<a style="color: black;" href="#/sifre/{{users._id}}">Şifre Değiştir</a>
 				</li>
 			</li>
 			<br>

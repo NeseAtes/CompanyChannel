@@ -9,8 +9,8 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
     }
     $scope.checkdene=function(checkperid){
         $scope.is_id=localStorage.getItem('is_id');
-        console.log("kontrol",$scope.is_id );
-        console.log("kontrol2",checkperid );
+        //console.log("kontrol",$scope.is_id );
+        //console.log("kontrol2",checkperid );
         if ($scope.is_id==checkperid) {
             return $scope.is_id
         }
@@ -54,7 +54,7 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
 
     $scope.updateData=function(comid,comcomment){
         //console.log("$scope.namecom",comcomment);
-        //console.log("comid",comid);
+        //console.log();
         var data={
             new_comment:comcomment,
             comment_ID:comid
@@ -73,4 +73,60 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
             });
         })
     }
+
+
+    $scope.uploadFile = function(comId,comm){
+       
+        var comment_file=comm;
+        var comment_ID=comId;
+        
+        console.log("comId",comId);
+        console.log("comment_file",comm);
+        var uploadUrl = "http://localhost:3000/api/comment/picture";
+        var fd = new FormData();
+        fd.append('comment_file',comment_file);
+        fd.append('comment_ID',comment_ID);
+
+        $http.post(uploadUrl,fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).then(function(response){
+          console.log("responseİmage",response);
+           setTimeout(function(){
+                    $window.location.reload();
+            });
+        })
+    };
+
+    $scope.deleteImg=function(commid,comment){
+       console.log("commid",commid);
+       console.log("comment_file",comment);
+        $http.delete("http://localhost:3000/api/comment/picture?comment_ID="+commid+"&path="+comment).then(function(response){
+            console.log("comImgResponse",response);
+            setTimeout(function(){
+                    $window.location.reload();
+            });
+        })
+    }
+
+
+
 });
+
+
+
+app.directive('fileModel', ['$parse', function ($parse) {
+return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+        var model = $parse(attrs.fileModel);
+        var modelSetter = model.assign;
+
+        element.bind('change', function(){
+            scope.$apply(function(){
+                modelSetter(scope, element[0].files[0]);
+            });
+        });
+    }
+};
+}]);

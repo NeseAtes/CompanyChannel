@@ -13,7 +13,9 @@
 	textarea {
 		width: 50%;
 	}
-
+	.renk:hover{
+		background-color: #fafafa;
+	}
 </style>
 <div class="container">
 	<li ng-repeat="sub in subject">
@@ -52,7 +54,13 @@
 					<form editable-form name="editableForm" onaftersave="saveUser()" style="padding-bottom: 0px;">
 						<pre editable-textarea="com.comment"  e-name="name" onbeforesave="checkName($data)" onaftersave="updateData(com._id,com.comment)" e-required>
 							<pre>{{com.comment}}</pre></pre>
-				    
+				    	<!--a editable-file="com.picture_paths">{{ com.picture_paths}}</a-->
+				    	
+				    <div ng-repeat="picture in com.picture_paths" class="renk">
+				    	<button style="float: right;" class="d-flex align-items-end flex-column fas fa-times" ng-click="deleteImg(com._id,picture)" id="dene"></button>
+				    	<img ng-src="{{picture}}" width="60%" height="20%" href="">
+				    </div>
+				    	
 				      <div class="row d-flex align-items-end flex-column">
 				      	 <!-- button to show form -->
 				      <button type="button" style="font-weight: bold;" class="btn btn-light" ng-show="editPer(com.personnel_ID)" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
@@ -68,6 +76,11 @@
 				      </span>
 				      </div>  
 				</form>
+				<div class="d-flex align-items-end flex-column" ng-show="editPer(com.personnel_ID)">
+					<input type="file" name="comment_file" file-model="comment_file"/><br>
+					<button ng-click="uploadFile(com._id,comment_file)">Yükle</button>
+				</div>
+				
 				<small style="float: right; font-family: sans-serif;">{{com.personnel_name}}</small>
 				<br>
 				<small style="float: right; font-family: monospace;">{{com.date}}</small>
