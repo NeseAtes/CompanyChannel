@@ -52,7 +52,11 @@
 					<form editable-form name="editableForm" onaftersave="saveUser()" style="padding-bottom: 0px;">
 						<pre editable-textarea="com.comment"  e-name="name" onbeforesave="checkName($data)" onaftersave="updateData(com._id,com.comment)" e-required>
 							<pre>{{com.comment}}</pre></pre>
-				    
+				    	<!--a editable-file="com.picture_paths">{{ com.picture_paths}}</a-->
+				    	<a href="">
+				    		<img ng-repeat="pic in com.picture_paths" ng-src="{{pic}}" width="60%" height="20%" href=""><br>
+
+				    	</a>
 				      <div class="row d-flex align-items-end flex-column">
 				      	 <!-- button to show form -->
 				      <button type="button" style="font-weight: bold;" class="btn btn-light" ng-show="editPer(com.personnel_ID)" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
@@ -68,6 +72,8 @@
 				      </span>
 				      </div>  
 				</form>
+				<input type="file" name="comment_file" file-model="comment_file"/><br><br>
+				<button ng-click="uploadFile(com._id,comment_file)">Upload</button>
 				<small style="float: right; font-family: sans-serif;">{{com.personnel_name}}</small>
 				<br>
 				<small style="float: right; font-family: monospace;">{{com.date}}</small>

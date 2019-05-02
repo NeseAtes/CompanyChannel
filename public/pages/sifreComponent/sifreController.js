@@ -14,5 +14,7 @@ app.controller('sifreController',function($scope,$http,$routeParams,$timeout,$wi
     .then(function(response) {
       console.log("response3",response.data.data);
     });
+    $scope.eskisifre="";
+    $scope.yenisifre="";
   }
 });
