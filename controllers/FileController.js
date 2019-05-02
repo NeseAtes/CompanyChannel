@@ -28,15 +28,45 @@ var deleteFile = function (tablename, id, res) { //id e sahip veriye bağlı tü
             fs.unlink("public\\" + element, (err) => {
                 if (err) throw err;
                 console.log('successfully deleted');
-                const index = filenames.indexOf(element);
+                var index = filenames.indexOf(element);
 
                 if (index !== -1) {
                     result.picture_paths.splice(index, 1);
                 }
-                connection.collection(tablename).update(id,result);
+                connection.collection(tablename).update(id, result);
             });
+        });
+    });
+}
+var deleteOneFile = function (res,next,tablename, path, id) {
+    fs.unlink("public\\" + path, (err) => {
+        if (err) {
+            res.locals.data = {
+                data: false
+            }
+            next();
+        }
+        var connection = res.locals.database;
+        connection.collection(tablename).findOne(id, function (err, result) {
+            if (err) {
+                res.locals.data = {
+                    data: false
+                }
+                next();
+            };
+
+            var index = result.picture_paths.indexOf(path);
+            if (index !== -1) {
+                result.picture_paths.splice(index, 1);
+            }
+            connection.collection(tablename).update(id, result);
+            res.locals.data = {
+                data: true
+            }
+            next();
         });
     });
 }
 module.exports.uploadFile = uploadFile;
 module.exports.deleteFile = deleteFile;
+module.exports.deleteOneFile = deleteOneFile;

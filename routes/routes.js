@@ -22,11 +22,12 @@ module.exports = function (app) {
 
 	app.post('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.addSubject, BaseController.EndSession);
 	app.get('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getSubject, BaseController.EndSession);
+	app.delete('/api/subject', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
 	app.get('/api/subject/one', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getOneSubject, BaseController.EndSession);
 	app.get('/api/subject/tag', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getSubjectsforTag, BaseController.EndSession);
-	app.delete('/api/subject/:subject_ID', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.deleteSubject, BaseController.EndSession);
 	app.get('/api/subject/personnel', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.getPersonnelSubjects, BaseController.EndSession);
 	app.post('/api/subject/picture', TokenCtrl.normalControl, BaseController.InitSession, subject_upload.single('subject_file'), SubjectController.uploadSubjectPicture, BaseController.EndSession);
+	app.delete('/api/subject/picture', TokenCtrl.normalControl, BaseController.InitSession, SubjectController.deleteOneSubjectPicture, BaseController.EndSession);
 
 	app.post('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.addComment, BaseController.EndSession);
 	app.get('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.getComment, BaseController.EndSession);
@@ -35,6 +36,7 @@ module.exports = function (app) {
 	app.delete('/api/comment', TokenCtrl.normalControl, BaseController.InitSession, CommentController.deleteComment, BaseController.EndSession);
 	app.post('/api/comment/answer', TokenCtrl.normalControl, BaseController.InitSession, CommentController.answer, BaseController.EndSession);
 	app.post('/api/comment/picture', TokenCtrl.normalControl, BaseController.InitSession, comment_upload.single('comment_file'), CommentController.uploadCommentPicture, BaseController.EndSession);
+	app.delete('/api/comment/picture', TokenCtrl.normalControl, BaseController.InitSession,CommentController.deleteOnePicture, BaseController.EndSession);
 
 	app.get('/api/companies', TokenCtrl.normalControl, BaseController.InitSession, CompaniesCtrl.getCompanies, BaseController.EndSession);
 	app.post('/api/companies', BaseController.InitSession, CompaniesCtrl.addCompany, BaseController.EndSession);
