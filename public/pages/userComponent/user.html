@@ -69,6 +69,25 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+          <div class="box box-primary" ng-show="imagePer(users._id)">
+            <div class="box-header with-border">
+              <h3 class="box-title">Settings</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-key margin-r-5"></i> <a style="color: black;" href="#/sifre/{{users._id}}">Şifre Değiştir</a></strong>
+
+              <hr>
+
+              <strong><i class="fa fa-user-circle margin-r-5"></i> Profil Resmi Değiştir</strong>
+
+              <li><br>
+                <input type="file" file-model="myFile"/><br>
+                <button ng-click="uploadFile()">Yükle</button><br><br>
+              </li>
+            </div>
+            <!-- /.box-body -->
+          </div>
         </div>
         <!-- /.col -->
         <div class="col-md-9">

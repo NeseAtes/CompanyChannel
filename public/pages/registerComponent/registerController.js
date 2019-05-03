@@ -7,7 +7,7 @@ app.controller('registerController', function ($scope, $http, $location, $window
             role:$scope.role
         }
        
-        $http.post("http://localhost:3000/api/personnels", JSON.stringify(data))
+        $http.post("http://localhost:3000/api/admin/personnels", JSON.stringify(data))
         .then(function (response) {
             if (response.data.data)
                 $window.location.reload();
