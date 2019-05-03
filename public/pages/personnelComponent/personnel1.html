@@ -1,0 +1,25 @@
+
+<style>
+  .col-lg-4 {
+    left: 3%;
+    padding-top: 3%;
+  }
+  .col-lg-4:hover{
+    background-color: #fafafa;
+  }
+</style>
+
+<div ng-show="users()" class="container">
+  <div>
+  <h1 style="text-align: center;">Users</h1>
+</div>
+  <div class="row">
+    <div class="col-lg-4" ng-repeat="personnel in personnels">
+      <a href="#/user/{{personnel._id}}">
+        <img ng-src="{{personnel.picture_path}}" width="30%" height="15%">
+      </a>  
+      <a style="font-family: sans-serif; color: black;" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>  
+                  
+    </div>
+  </div>
+</div>

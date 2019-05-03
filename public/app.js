@@ -40,6 +40,8 @@ app.controller('appController',function($scope,$localStorage,$window,$location,$
     }
     $http.get("http://localhost:3000/api/personnels?personnel_ID="+localStorage.getItem('is_id'))
     .then(function(response) {
-      $scope.online_user=response.data.data[0];
+      console.log("localStorage.getItem('is_id')",localStorage.getItem('is_id'))
+      console.log("response",response);
+      $scope.online_user=response.data.data;
     });
 });

@@ -14,7 +14,7 @@ app.controller('personnelController',function($scope,$http,$localStorage) {
 
 	$http.get("http://localhost:3000/api/personnels")
     .then(function(response) {
-      console.log("response2",response.data.data);
+      console.log("response2",response);
       $scope.personnels=response.data.data
     });
 })
