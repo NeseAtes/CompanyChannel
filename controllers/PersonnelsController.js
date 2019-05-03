@@ -6,6 +6,8 @@ var fs = require('fs');
 
 var addPersonnel = function (req, res, next) {
     req.body["company_ID"] = res.locals.data.data.company_id;
+    req.body["subject_count"]=0;
+    req.body["comment_count"]=0;
     bcrypt.hash(req.body.password, 10, function (err, hash) {
         if(err) throw err;
         req.body.password = hash;

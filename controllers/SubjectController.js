@@ -93,7 +93,7 @@ var deleteOneSubjectPicture = function (req, res, next) {
 		_id: new mongodb.ObjectId(req.query.subject_ID)
 	}
 
-	fileCtrl.deleteOneFile(res, next,"subjects", path, condition);
+	fileCtrl.deleteOneFile(res, next, "subjects", path, condition);
 }
 
 var deleteSubject = function (req, res, next) {
@@ -103,6 +103,14 @@ var deleteSubject = function (req, res, next) {
 	connection.collection("subjects").findOne(id, function (err, result) {
 		if (err) throw err;
 		if (result != null) {
+			var personnel_id = { _id: new mongodb.ObjectId(result.personnel_ID) }
+			connection.collection("personnels").findOne(personnel_id, function (err, result) {
+				if (err) throw err;
+				if (result != null) {
+					result.subject_count = result.subject_count - 1;
+					connection.collection("personnels").update(personnel_id, result);
+				}
+			});
 			var tags = result.tags;
 			tagCtrl.deleteTag(tags, res);
 		}

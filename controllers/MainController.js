@@ -51,12 +51,28 @@ var addingOperations = function (tablename, result, req, res, next) {
       email: company_name + "@" + company_name + ".com",
       personnel_name: company_name,
       company_ID: result.insertedId.toString(),
-      picture_path:"uploads\\user.png"
+      picture_path: "uploads\\user.png",
+      subject_count:0,
+      comment_count:0
     }
     bcrypt.hash(company_name, 10, function (err, hash) {
       if (err) throw err;
       user["password"] = hash;
       connection.collection("personnels").insertOne(user);
+    });
+  }
+  if (tablename == "subjects" || tablename == "comments") {
+    var personnel_id = { _id: new mongodb.ObjectId(req.body.personnel_ID) }
+    connection.collection("personnels").findOne(personnel_id, function (err, result) {
+      if (err) throw err;
+      if (result != null) {
+        if (tablename == "subjects")
+          result.subject_count = result.subject_count + 1;
+        else
+          result.comment_count = result.comment_count + 1;
+        console.log("myres",result)
+        connection.collection("personnels").update(personnel_id, result);
+      }
     });
   }
 }
