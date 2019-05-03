@@ -1,46 +1,23 @@
-<style>
-  div.row.box {
-    background-color: rgb(209, 208, 208);
-    border-style: groove;
-  }
+<h1 class="list-header-h1">Tags</h1>
+<br><br>
 
-  .subjectlist {
-    position: absolute;
-    left: 25%;
-    width: 50%;
-    padding-top: 2%;
-  }
-  .renk:hover{
-    color: black;
-  }
-</style>
-  <div class="container">
-    <div>
-      <div class="subjectlist">
-      <div>
-        <h1 style="color: #1c2a48; font-family: serif;">Subjects Tagged</h1>
-      </div>
-      <hr>
-      <div ng-repeat="sub in tags">
-        <ul>
-          <hr>
-          <div >
-              <a style="color: black; font-family: cursive; " href="#/subject/{{sub._id}}">{{sub.subject}}</a>
-              <br>
-              <small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>  
-              <br>
-
-              <small style="float: right; font-family: monospace;">{{sub.date}}</small>              
-              
-              <span class="badge badge-danger badge-pill">{{sub.count}} view</span> 
-              <span ng-repeat="tag in sub.tags">
-                <a style="background-color: #5e92f3;" class="renk badge" href="#/tag/{{tag}}">{{tag}}</a>  
-              </span>
-          </div>
-        </ul>
-      </div>
-     <hr>
-
+<div class="col-md-10">
+  <!-- Default box -->
+  <div class="box" ng-repeat="sub in tags">
+    <div class="box-header with-border">
+      <h3 class="box-title"><b><i>{{sub.subject}}</i></b></h3>
+      <i class="fa fa-clock-o right"> {{sub.date}}</i>
     </div>
+    <div class="box-body">
+      <span ng-repeat="tag in sub.tags">
+        <a class="btn btn-primary btn-xs" href="#/tag/{{tag}}">{{tag}}</a>
+      </span>
     </div>
+    <!--/.box-body -->
+    <div class="box-footer">
+      <span class="badge badge-pill">{{sub.count}} view</span>
+    </div>
+  <!--/.box-footer-->
   </div>
+  <!-- /.box -->
+</div>

@@ -4,7 +4,7 @@
   <!-- Default box -->
   <div class="box" ng-repeat="sub in subjects">
     <div class="box-header with-border">
-      <h3 class="box-title"><b><i>{{sub.subject}}</i></b></h3>
+     <a href="#/subject/{{sub._id}}"><h3 class="box-title" ><b><i>{{sub.subject}}</i></b></h3></a> 
       <i class="fa fa-clock-o right"> {{sub.date}}</i>
     </div>
     <div class="box-body">
