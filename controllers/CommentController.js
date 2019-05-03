@@ -60,7 +60,7 @@ var deleteOnePicture = function (req, res, next) {
 	var condition = {
 		_id: new mongodb.ObjectId(req.query.comment_ID)
 	}
-	fileCtrl.deleteOneFile(res, next,"comments", path, condition);
+	fileCtrl.deleteOneFile(res, next, "comments", path, condition);
 }
 var getComment = function (req, res, next) {
 	var condition = {
@@ -96,6 +96,16 @@ var deleteComment = function (req, res, next) {
 	}
 	var connection = res.locals.database;
 	connection.collection("comments").findOne(condition, function (err, result) {
+
+		var personnel_id = { _id: new mongodb.ObjectId(result.personnel_ID) }
+		connection.collection("personnels").findOne(personnel_id, function (err, result) {
+			if (err) throw err;
+			if (result != null) {
+				result.comment_count = result.comment_count - 1;
+				connection.collection("personnels").update(personnel_id, result);
+			}
+		});
+
 		if (result.personnel_ID == res.locals.data.data.personnel_id) {
 			fileCtrl.deleteFile("comments", condition, res);
 			mainCtrl.deleteData("comments", condition, req, res, next);
