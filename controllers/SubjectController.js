@@ -70,7 +70,6 @@ var getOneSubject = function (req, res, next) {
 	var connection = res.locals.database;
 	connection.collection("subjects").find(condition).toArray(function (err, result) {
 		var newVal = result[0];
-
 		newVal["count"] = newVal.count + 1;
 
 		mainCtrl.updateData("subjects", condition, newVal, res, next);

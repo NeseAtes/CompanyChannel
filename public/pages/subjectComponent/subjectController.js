@@ -19,10 +19,9 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
     $scope.sub_id=$routeParams.subjectid;
     console.log("subjectid",$routeParams.subjectid);
     $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
-        console.log("AAAAAAAresponse",response);
-        $scope.subject=response.data.data;
+        $scope.subject=response.data.data[0];
         $scope.checkPer=response.data.data[0].personnel_ID;
-        //console.log("$scope.checkPer",$scope.checkPer);
+        console.log("eee",response.data.data[0].personnel_ID)
     });
     $http.get("http://localhost:3000/api/comment?subject_ID="+$scope.sub_id).then(function(response) {
     	console.log("comResponse",response);
