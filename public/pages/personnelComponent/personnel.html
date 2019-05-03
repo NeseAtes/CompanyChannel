@@ -37,17 +37,17 @@
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-aqua-active">
-              <a class="widget-user-username" style="color: white;" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>
+            <div class="widget-user-header">
+              <a class="widget-user-username" href="#/user/{{personnel._id}}"><b>{{personnel.personnel_name}}</b></a>
             </div>
             <div class="widget-user-image">
               <img class="img-circle" ng-src="{{personnel.picture_path}}" alt="User">
             </div>
-            <div class="box-footer">
+            <div class="box-footer bg-aqua-active">
               <div class="row">
                 <div class="col-sm-6 border-right">
                   <div class="description-block">
-                    <h5 class="description-header">{{personnel.subject_count}}</h5>
+                    <h5 class="description-header"><b>{{personnel.subject_count}}</b></h5>
                     <span class="description-text">QUESTİONS</span>
                   </div>
                 </div>

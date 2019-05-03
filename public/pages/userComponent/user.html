@@ -102,7 +102,7 @@
                 <div ng-repeat="per in perSub" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab" ng-show="isSet(1)">
                   <li>
                     <p class="badge badge-danger">{{per.count}} view</p>
-                    <a style="padding-left: 8%;" class="aa" href="#/subject/{{per._id}}">{{per.subject}}</a>
+                    <a style="padding-left: 8%;" class="aa" href="#/subject/{{per._id}}"><b>{{per.subject}}</b></a>
                     <small style="font-family: monospace; float: right;">{{per.date}}</small>
                   </li>
                   <hr>
@@ -113,7 +113,7 @@
                 <div ng-repeat="com in comSub" class="tab-pane" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab" ng-show="isSet(2)">
                   <li>
                     <p class="badge badge-danger">{{com.count}} view</p>
-                    <a style="padding-left: 8%; color: black;" href="#/subject/{{com.subject_ID}}">{{com.subject}}</a>
+                    <a style="padding-left: 8%;" href="#/subject/{{com.subject_ID}}"><b>{{com.subject}}</b></a>
                     <small style="font-family: monospace; float: right;">{{com.date}}</small>
                   </li>
                   <hr>

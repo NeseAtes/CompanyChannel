@@ -1,26 +1,14 @@
-<style type="text/css">
-	.container{
-		position: absolute;
-		left: 25%;
-		width: 50%;
-    	padding-top: 2%;
-	}
-</style>
+<h1 class="list-header-h1">Results</h1>
+<br><br>
 
-<div class="container">
-	<div>
-		<h1 style="color: #1c2a48; font-family: serif;">Results</h1>
-		<hr>
-		<ul ng-repeat="sub in users">
-    		<hr>
-    		<div>
-    			<a  style="color:black; color: black; font-family: cursive;" href="#/subject/{{sub.id}}"><b>{{sub.subject}}</b></a>
-    			<br>
-    			<br>
-    			<small style="float: right; font-family: monospace;">{{sub.date}}</small>
-    		</div>
-    	</ul>	
-    	
-		
-	</div>
-</div>    
+<div class="col-md-10">
+  <!-- Default box -->
+  <div class="box" ng-repeat="sub in users">
+    <div class="box-header with-border">
+      <a class="box-title" href="#/subject/{{sub.id}}"><b><i>{{sub.subject}}</i></b></a>
+      <i class="fa fa-clock-o right"> {{sub.date}}</i>
+    </div>
+  
+  </div>
+  <!-- /.box -->
+</div>

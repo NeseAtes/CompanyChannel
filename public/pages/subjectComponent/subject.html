@@ -41,13 +41,14 @@
           <div class="box-header with-border">
             <div class="user-block">
               <h2>{{subject.subject}}</h1>
+                <span style="color: green; font-size: 30px;" ng-show="{{subject.isOk}}" class="fa fa-check"></span> 
               <h3 class="text-right">{{subject.personnel_name}}</h3>
               <span class="description text-right">{{subject.date}}</span>
             </div>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <!-- post text -->
+            <!-- post text --> 
             <p>{{subject.description}}</p>
 
             <!-- Attachment -->
@@ -88,6 +89,11 @@
                         <button type="button" style="font-weight: bold;" class="btn btn-primary" ng-show="editPer(comment.personnel_ID)" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
                           Edit
                         </button>
+                        <div >
+                          <button ng-click="checkshow(comment._id)" ng-show="checkdene(checkPer)" class="fa fa-check"></button>
+                          <span style="color: green; font-size: 30px;" ng-show="{{comment.is_answer}}" class="fa fa-check"></span>
+                        </div>
+
                         <!-- buttons to submit / cancel form -->
                         <span ng-show="editableForm.$visible">
                           <button type="submit" class="btn btn-sm btn-light fa fa-edit" ng-disabled="editableForm.$waiting"></button> 
@@ -113,7 +119,7 @@
           <!-- /.box-footer -->
           <div class="box-footer">
 
-            <div class="box">
+            <div>
               <h3>
                 Your answer
               </h3>

@@ -99,9 +99,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- search form (Optional) -->
           <form class="sidebar-form ">
             <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <input type="text" name="q" ng-model="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn" ng-controller="appController">
-                <button type="submit" ng-model="search" class="btn btn-flat"><i class="fa fa-search"
+                <button type="submit"  class="btn btn-flat"><i class="fa fa-search"
                     ng-click="elasticsearch()"></i>
                 </button>
               </span>
@@ -131,12 +131,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
           <!-- Sidebar Menu -->
-          <ul class="sidebar-menu" data-widget="tree">
+          <ul class="sidebar-menu" data-widget="tree" ng-controller="appController">
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#/subject_list"><i class="fa fa-home"></i> <span>Home</span></a></li>
             <li class="active"><a href="#/personnel"><i class="fa fa-users"></i> <span>Personnel</span></a></li>
-            <li class="active"><a href="#/register"><i class="fa fa-tags"></i> <span>Register</span></a></li>
             <li class="active"><a href="#/tag_list"><i class="fa fa-user-circle"></i> <span>Tags</span>
+            <li ng-show="isAdmin()" class="active"><a href="#/register"><i class="fa fa-tags"></i> <span>Register</span></a></li>
               </a>
             </li>
           </ul>
