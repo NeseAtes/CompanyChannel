@@ -1,0 +1,83 @@
+<style>
+	.container {
+		position: absolute;
+		left: 25%;
+		width: 50%;
+		padding-top: 2%;
+	}
+
+	li {
+		list-style-type: none;
+		width: 100%;
+	}
+	#nav-questions-tab{
+		color: black
+	}
+	#nav-questions-tab:hover{
+		border-bottom: 2px solid #1c2a48;
+	}
+	#nav-comments-tab:hover{
+		border-bottom: 2px solid #1c2a48;
+	}
+</style>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6 d-flex align-items-center flex-column">
+		
+				<img ng-src="{{users.picture_path}}" width="60%" height="20%">
+
+		</div>
+		<div class="col-lg-6">
+			<li class="box">
+				<h1 style="color: black; font-family: cursive;">{{users.personnel_name}}</h1>
+				<br>
+				<pre style="font-family: sans-serif; font-size: 20px">{{users.email}}</pre>
+				<br>
+				<li ng-show="imagePer(users._id)">
+					<input type="file" file-model="myFile"/><br><br>
+					<button ng-click="uploadFile()">Upload</button><br><br>
+					<a style="color: black;" href="#/sifre/{{users._id}}">Şifre Değiştir</a>
+				</li>
+			</li>
+			<br>
+			<hr>
+		</div>
+	</div>
+	<br>
+
+
+
+	<div class="row">
+		<div class="col-lg-12">
+			<nav>
+			  	<div class="nav nav-tabs row d-flex justify-content-end" id="nav-tab" role="tablist">
+			    	<div ng-class="{ active: isSet(1) }">
+			    		<a class="nav-item nav-link active" id="nav-questions-tab" data-toggle="tab" ng-click="setTab(1)" role="tab" aria-controls="nav-questions" aria-selected="true">Questions</a> 
+			    	</div>
+			    	<div ng-class="{ active: isSet(2) }" > 
+			    		<a class="nav-item nav-link" id="nav-comments-tab" data-toggle="tab"  ng-click="setTab(2)" role="tab" aria-controls="nav-comments" aria-selected="true">Comments</a> 
+			    	</div>
+			  	</div>
+			</nav>
+			<br>
+			<div class="tab-content" id="nav-tabContent">
+			  	<div ng-repeat="per in perSub" class="tab-pane fade show active" id="nav-questions" role="tabpanel" aria-labelledby="nav-questions-tab" ng-show="isSet(1)">
+			  		<li>
+			  			<p class="badge badge-danger ">{{per.count}} view</p>
+			  			<a style="padding-left: 8%; color: black;" href="#/subject/{{per._id}}">{{per.subject}}</a>
+			  			<small style="font-family: monospace; float: right;">{{per.date}}</small>
+			  		</li>
+			  		<hr>
+			  	</div>
+			  	<div ng-repeat="com in comSub" class="tab-pane fade show active" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab" ng-show="isSet(2)">
+			  		<li>
+			  			<p class="badge badge-danger">{{com.count}} view</p>
+				  		<a style="padding-left: 8%; color: black;" href="#/subject/{{com.subject_ID}}">{{com.subject}}</a>
+				  		<small style="font-family: monospace; float: right;">{{com.date}}</small>
+			  		</li>
+			  		<hr>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>

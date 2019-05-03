@@ -1,0 +1,33 @@
+<style>
+  div.row.box {
+    background-color: rgb(209, 208, 208);
+    border-style: groove;
+  }
+
+  .subjectlist {
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    padding-top: 2%;
+  }
+</style>
+    <div ng-show="users()" class="container">
+      <div>
+        <div class="subjectlist">
+        <div>
+          <h1 style="color: #1c2a48; font-family: serif;">Tags</h1>
+        </div>
+        <hr>
+        <div ng-repeat="tag in tags">
+          <ul>
+            <hr>
+            <div >                
+                <a style="background-color: #5e92f3;" href="#/tag/{{tag.tag}}">{{tag.tag}}</a>  
+            </div>
+          </ul>
+        </div>
+       <hr>
+
+      </div>
+      </div>
+    </div>

@@ -33,15 +33,15 @@
     <section class="content">
 
         <!-- /.col -->
-        <div class="col-md-4" ng-repeat="personnel in personnels">
+        <div class="col-md-3" ng-repeat="personnel in personnels">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user">
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-aqua-active">
-              <a class="widget-user-username" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>
+              <a class="widget-user-username" style="color: white;" href="#/user/{{personnel._id}}">{{personnel.personnel_name}}</a>
             </div>
             <div class="widget-user-image">
-              <img class="img-circle" ng-src="{{personnel.picture_path}}" alt="User Avatar">
+              <img class="img-circle" ng-src="{{personnel.picture_path}}" alt="User">
             </div>
             <div class="box-footer">
               <div class="row">
