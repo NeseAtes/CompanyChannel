@@ -21,14 +21,18 @@ module.exports = function (app) {
 	app.post('/login', BaseController.InitSession,PersonnelsCtrl.login,BaseController.EndSession);
 	app.get('/logout',BaseController.InitSession, PersonnelsCtrl.logout,BaseController.EndSession);
 
-	app.all('/api/*', BaseController.InitSession)//init
+	app.all('/api/base/*', BaseController.InitSession)//init
 
-	app.post('/api/companies', CompaniesCtrl.addCompany);
-	app.post('/api/createIndex', ElasticSearchCtrl.createIndex);
+	app.post('/api/base/companies', CompaniesCtrl.addCompany);
+	app.post('/api/base/createIndex', ElasticSearchCtrl.createIndex);
 
-	app.all('/api/*', TokenCtrl.adminControl, BaseController.InitSession)//admin
+	app.all('/api/base/*', BaseController.EndSession)//init end
 
-	app.post('/api/personnels', PersonnelsCtrl.addPersonnel);
+	app.all('/api/admin/*', TokenCtrl.adminControl, BaseController.InitSession)//admin
+
+	app.post('/api/admin/personnels', PersonnelsCtrl.addPersonnel);
+
+	app.all('/api/admin/*', BaseController.EndSession)//admin end
 
 	app.all('/api/*', TokenCtrl.normalControl, BaseController.InitSession)//normal
 
@@ -68,5 +72,5 @@ module.exports = function (app) {
 	app.post('/api/tags', TagCtrl.addTag);
 	app.post('/api/tags/delete', TagCtrl.deleteTag);
 
-	app.all('/api/*', BaseController.EndSession)
+	app.all('/api/*', BaseController.EndSession) //normal end
 }

@@ -32,26 +32,18 @@
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <div>
-  <section>
+  <section class="content">
     <div class="row">
 
-      <div class="col-md-">
+      <div class="col-md-12">
         <!-- Box Comment -->
         <div class="box box-widget">
           <div class="box-header with-border">
             <div class="user-block">
-              <span class="username"><a href="#">{{subject.personnel_name}}</a></span>
-              <span class="description">{{subject.date}}</span>
+              <h2>{{subject.subject}}</h1>
+              <h3 class="text-right">{{subject.personnel_name}}</h3>
+              <span class="description text-right">{{subject.date}}</span>
             </div>
-            <!-- /.user-block -->
-            <div class="box-tools">
-              <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
-                <i class="fa fa-circle-o"></i></button>
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-            <!-- /.box-tools -->
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -60,14 +52,10 @@
 
             <!-- Attachment -->
             <div class="attachment-block clearfix" ng-repeat="imgPath in subject.picture_paths">
-              <img class="attachment-img" src="{{imgPath}}" alt="Attachment Image">
+              <img class="attachment-img" ng-src="{{imgPath}}" alt="Attachment Image">
               <button class="btn btn-box-tool btn-xs fa fa-times" ng-click="deleteImg(subject._id,imgPath)"></button>
             </div>
             <!-- /.attachment-block -->
-
-            <!-- Social sharing buttons -->
-            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-            <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
 
           </div>
           <!-- /.box-body -->
@@ -82,36 +70,42 @@
                 <div class="timeline-item">
                   <span class="time"><i class="fa fa-clock-o"></i> {{comment.date}}</span>
 
-                  <h3 class="timeline-header"><b>{{comment.personnel_name}}</b></h3>
+                  <h2 class="timeline-header"><b>{{comment.personnel_name}}</b></h2>
 
                   <div class="timeline-body">
-                    <pre editable-textarea="com.comment" e-name="name" onbeforesave="checkName($data)"
-                      onaftersave="updateData(com._id,com.comment)" e-required>
-                        {{comment.comment}}
-                    </pre>
-
-                    <!-- Attachment -->
-                    <div class="attachment-block clearfix" ng-repeat="imgPath in comment.picture_paths">
-                      <img class="attachment-img" src="{{imgPath}}" alt="Attachment Image">
-                      <button class="btn btn-box-tool btn-xs fa fa-times"
-                        ng-click="deleteImg(comment._id,imgPath)"></button>
-                    </div>
+                    <form editable-form name="editableForm" onaftersave="saveUser()">
+                      <pre editable-textarea="comment.comment" e-name="name" onbeforesave="checkName($data)"
+                        onaftersave="updateData(comment._id,comment.comment)" e-required>
+                          {{comment.comment}}
+                      </pre>
+                       <div class="attachment-block clearfix" ng-repeat="imgPath in comment.picture_paths">
+                          <img class="attachment-img" ng-src="{{imgPath}}" alt="Attachment Image">
+                          <button class="btn btn-box-tool btn-xs fa fa-times"
+                            ng-click="deleteImg(comment._id,imgPath)"></button>
+                        </div>
+                      <div>
+                         <!-- button to show form -->
+                        <button type="button" style="font-weight: bold;" class="btn btn-primary" ng-show="editPer(comment.personnel_ID)" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                          Edit
+                        </button>
+                        <!-- buttons to submit / cancel form -->
+                        <span ng-show="editableForm.$visible">
+                          <button type="submit" class="btn btn-sm btn-light fa fa-edit" ng-disabled="editableForm.$waiting"></button> 
+                          <a style="color: #1c2a48;" class="btn btn-sm btn-light fa fa-trash " ng-click="deleteData(comment._id)"></a>
+                          <button type="button" class="btn btn-sm btn-light fa fa-window-close" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                          </button>
+                          <!--a style="color: #1c2a48;" class="btn btn-sm btn-light" ng-click="updateData(com._id,com.comment)">Update</a-->  
+                        <button class="btn btn-default btn-xs pull-right"
+                          ng-click="uploadFile(comment._id,comment_file)">Yükle</button>
+                        <input type="file" class="btn btn-light btn-xs pull-right"name="comment_file" file-model="comment_file" />
+                        
+                  
+                        </span>
+                      </div>
+                    </form>
                     <!-- /.attachment-block -->
                   </div>
-                  <div class="timeline-footer" ng-show="editPer(comment.personnel_ID)">
-                    <div class="row">
-                      <div class="col-md-1">
-                        <button class="btn btn-danger btn-xs" ng-click="deleteData(comment._id)">Delete</button>
-
-                      </div>
-                      <div class="col-md-1">
-                        <input type="file" class="btn btn-primary btn-xs"name="comment_file" file-model="comment_file" />
-                        <button class="btn btn-default btn-xs"
-                          ng-click="uploadFile(comment._id,comment_file)">Yükle</button>
-                      </div>
-                    </div>
-
-                  </div>
+                 
                 </div>
               </li>
               <!-- END timeline item -->
@@ -120,16 +114,16 @@
           <div class="box-footer">
 
             <div class="box">
-              <div class="box-header">
+              <h3>
                 Your answer
-              </div>
+              </h3>
               <!-- /.box-header -->
               <div class="box-body pad">
                 <form>
-                  <textarea class="textarea" ng-model="comment" placeholder="Place some text here"
+                  <textarea class="textarea" ng-model="comment" placeholder="Place text here"
                     style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                 </form>
-                <button class="btn btn-dark" ng-click="addComment(sub_id)">Share</button>
+                <button class="btn btn-dark pull-right" ng-click="addComment(sub_id)">Share</button>
               </div>
             </div>
           </div>

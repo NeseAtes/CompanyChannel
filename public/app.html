@@ -18,6 +18,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="dist/css/AdminLTE.css">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
@@ -47,7 +48,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="#/subject_" class="logo">
+
+        <a href="#/subject_list" class="logo">
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Company</b>Channel</span>
         </a>
@@ -65,11 +67,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <!-- User Account Menu -->
               <li class="dropdown user user-menu" ng-controller="appController">
                 <!-- Menu Toggle Button -->
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
                   <img ng-src="{{online_user.picture_path}}" class="user-image" alt="User Image">
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">{{online_user.personnel_name}}</span>
+                  <!--span class="hidden-xs">{{online_user.personnel_name}}</span-->
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
@@ -83,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="#/user/{{online_user._id}}" class="btn btn-default btn-flat">Profile</a>
                       <!--TODO Kendi profiline yönlendir-->
                     </div>
                     <div class="pull-right" ng-controller="loginController">
@@ -123,7 +125,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="pull-left info">
               <p>{{online_user.personnel_name}}</p>
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <i class="fa fa-circle text-success">Online</i> 
             </div>
           </div>
 
@@ -159,7 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2019 <a href="#/">Company</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2019 <a href="#/subject_list">Company</a>.</strong> All rights reserved.
     </footer>
 
   </div>

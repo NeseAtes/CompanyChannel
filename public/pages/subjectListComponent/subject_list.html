@@ -1,49 +1,22 @@
-<style>
-  div.row.box {
-    background-color: rgb(209, 208, 208);
-    border-style: groove;
-  }
-
-  .subjectlist {
-    position: absolute;
-    left: 25%;
-    width: 50%;
-    padding-top: 2%;
-  }
-  .renk:hover{
-    color: black;
-  }
-</style>
-    <div ng-show="users()" class="container">
-      <div>
-        <div class="subjectlist">
-        <div>
-          <a class="btn btn-outline-secondary" style="float: right; background-color: #1c2a48; color: white; font-weight: bold; font-family: serif;" href="#/subjectAdd">ADD</a>
-
-          <h1 style="color: #1c2a48; font-family: serif;">Questions</h1>
-        </div>
-        <hr>
-        <div ng-repeat="sub in subjects">
-          <ul>
-            <hr>
-            <div >
-                <a style="color: black; font-family: cursive; " href="#/subject/{{sub._id}}">{{sub.subject}}</a>
-                <br>
-                <small style="float: right; font-family: sans-serif;">{{sub.personnel_name}}</small>  
-                <br>             
-                
-                <span class="badge badge-danger badge-pill">{{sub.count}} view</span>
-                <br> 
-                <small style="float: right; font-family: monospace;">{{sub.date}}</small> 
-                
-                <span ng-repeat="tag in sub.tags">
-                   <a style="background-color: #5e92f3;" class="renk badge" href="#/tag/{{tag}}">{{tag}}</a>  
-                </span>
-            </div>
-          </ul>
-        </div>
-       <hr>
-
-      </div>
-      </div>
+<h1 class="list-header-h1">Questions</h1>
+<div class="col-md-10">
+  <a class="btn btn-lg btn-info list-header-button" href="#/subjectAdd">ADD</a>
+  <!-- Default box -->
+  <div class="box" ng-repeat="sub in subjects">
+    <div class="box-header with-border">
+      <h3 class="box-title"><b><i>{{sub.subject}}</i></b></h3>
+      <i class="fa fa-clock-o right"> {{sub.date}}</i>
     </div>
+    <div class="box-body">
+      <span ng-repeat="tag in sub.tags">
+        <a class="btn btn-primary btn-xs" href="#/tag/{{tag}}">{{tag}}</a>
+      </span>
+    </div>
+    <!--/.box-body -->
+    <div class="box-footer">
+      <span class="badge badge-pill">{{sub.count}} view</span>
+    </div>
+  <!--/.box-footer-->
+  </div>
+  <!-- /.box -->
+</div>

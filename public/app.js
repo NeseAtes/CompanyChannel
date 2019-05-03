@@ -23,6 +23,9 @@ app.config(function($routeProvider,$locationProvider){
   }).when('/tag_list',{
     templateUrl: './pages/tag_listComponent/tag_list.html',
     controller: 'tag_listController'
+  }).when('/user/:userid', {
+      templateUrl: './pages/userComponent/user.html',
+      controller: 'userController'
   });
 });
 
@@ -41,7 +44,7 @@ app.controller('appController',function($scope,$localStorage,$window,$location,$
     $http.get("http://localhost:3000/api/personnels?personnel_ID="+localStorage.getItem('is_id'))
     .then(function(response) {
       console.log("localStorage.getItem('is_id')",localStorage.getItem('is_id'))
-      console.log("response",response);
-      $scope.online_user=response.data.data;
+      console.log("response8",response);
+      $scope.online_user=response.data.data[0];
     });
 });
