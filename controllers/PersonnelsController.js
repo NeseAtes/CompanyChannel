@@ -94,7 +94,7 @@ var login = function (req, res, next) {
                         role: result.role
                     };
                     var token = tokenCtrl.token(personnel);
-                    res.cookie('auth', token);
+                    res.cookie('auth', token.token);
                     res.locals.data = {
                         data: token,
                         is_id:result._id,

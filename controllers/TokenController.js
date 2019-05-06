@@ -7,7 +7,7 @@ var token = function (data) {
 
 var tokenControl = function (req, res, next, role) {
   if (req.cookies.auth != undefined) {
-    var token = req.cookies.auth.token;
+    var token = req.cookies.auth;
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
     jwt.verify(token, 'companykey', function (err, decoded) {
       if (err) {
