@@ -35,7 +35,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-
+<style type="text/css">
+  .input-group{
+    margin-top: 8px;
+  }
+</style>
 <body class="hold-transition skin-blue sidebar-mini" ng-controller="loginController">
 
   <div ng-show="!show">
@@ -71,7 +75,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- The user image in the navbar-->
                   <img ng-src="{{online_user.picture_path}}" class="user-image" alt="User Image">
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <!--span class="hidden-xs">{{online_user.personnel_name}}</span-->
+                  <span class="hidden-xs">{{online_user.personnel_name}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
@@ -97,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </div>
           <!-- search form (Optional) -->
-          <form class="sidebar-form ">
+          <form>
             <div class="input-group">
               <input type="text" name="q" ng-model="search" class="form-control" placeholder="Search...">
               <span class="input-group-btn" ng-controller="appController">
@@ -134,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <ul class="sidebar-menu" data-widget="tree" ng-controller="appController">
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#/subject_list"><i class="fa fa-home"></i> <span>Home</span></a></li>
-            <li class="active"><a href="#/personnel"><i class="fa fa-users"></i> <span>Personnel</span></a></li>
+            <li class="active"><a href="#/personnel"><i class="fa fa-users"></i> <span>Personnels</span></a></li>
             <li class="active"><a href="#/tag_list"><i class="fa fa-user-circle"></i> <span>Tags</span>
             <li ng-show="isAdmin()" class="active"><a href="#/register"><i class="fa fa-tags"></i> <span>Register</span></a></li>
               </a>
