@@ -1,7 +1,9 @@
 app.controller('loginController', function ($scope, $http, $cookies, $location, $window, SERVICE_URL, $localStorage) {
     if (typeof ($cookies.get('auth')) == 'string') {
         $scope.show = true;
-        $location.path("/subject_list");
+        if(location.hash=="#/"){
+            $location.path("/subject_list");
+        }
     }
     $scope.showBtn = function () {
         if (typeof ($cookies.get('auth')) == 'string') {
