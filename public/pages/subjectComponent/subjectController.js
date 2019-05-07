@@ -21,7 +21,8 @@ app.controller('subjectController', function($scope,$window, $http,$routeParams,
     $http.get("http://localhost:3000/api/subject/one?subject_ID="+$scope.sub_id).then(function(response) {
         $scope.subject=response.data.data[0];
         $scope.checkPer=response.data.data[0].personnel_ID;
-        //console.log("eee",response.data.data[0].personnel_ID)
+        console.log("subject",response.data.data[0].isOk);
+        $scope.dene=response.data.data[0].isOk;
     });
     $http.get("http://localhost:3000/api/comment?subject_ID="+$scope.sub_id).then(function(response) {
     	console.log("comResponse",response);
