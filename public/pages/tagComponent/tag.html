@@ -1,11 +1,11 @@
-<h1 class="list-header-h1">Subject's Tags</h1>
+<h1 class="list-header-h1">Subjects tagged</h1>
 <br><br>
 
 <div class="col-md-10">
   <!-- Default box -->
   <div class="box" ng-repeat="sub in tags">
     <div class="box-header with-border">
-      <h3 class="box-title"><b><i>{{sub.subject}}</i></b></h3>
+      <a href="#/subject/{{sub._id}}"><h3 class="box-title"><b><i>{{sub.subject}}</i></b></h3></a>
       <i class="fa fa-clock-o right"> {{sub.date}}</i>
     </div>
     <div class="box-body">

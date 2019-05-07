@@ -76,7 +76,7 @@
                   <div class="timeline-body">
                     <form editable-form name="editableForm" onaftersave="saveUser()">
                       <pre editable-textarea="comment.comment" e-name="name" onbeforesave="checkName($data)"
-                        onaftersave="updateData(comment._id,comment.comment)" e-required>
+                        onaftersave="updateData(comment._id,comment.comment)" e-rows = "7" e-cols = "125" e-required>
                           {{comment.comment}}
                       </pre>
                        <div class="attachment-block clearfix" ng-repeat="imgPath in comment.picture_paths">
@@ -101,9 +101,9 @@
                           <button type="button" class="btn btn-sm btn-light fa fa-window-close" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
                           </button>
                           <!--a style="color: #1c2a48;" class="btn btn-sm btn-light" ng-click="updateData(com._id,com.comment)">Update</a-->  
-                        <button class="btn btn-default btn-xs pull-right"
+                          <button class="btn btn-default btn-xs pull-right"
                           ng-click="uploadFile(comment._id,comment_file)">Yükle</button>
-                        <input type="file" class="btn btn-light btn-xs pull-right"name="comment_file" file-model="comment_file" />
+                          <input type="file" class="btn btn-light btn-xs pull-right"name="comment_file" file-model="comment_file" />
                         
                   
                         </span>
